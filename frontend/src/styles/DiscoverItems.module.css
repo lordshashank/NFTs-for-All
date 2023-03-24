@@ -1,0 +1,91 @@
+.discover-items > h1 {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 2rem;
+}
+.discover-card {
+  padding: 0.5rem;
+  border-width: 1px;
+  border-radius: 0.5rem;
+  background-color: rgb(15 23 42);
+  border-color: rgb(31 41 55);
+  transition: all 0.4s ease;
+}
+.nft {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+.nft-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 0.9;
+  border-radius: 0.5rem;
+  transition: all 0.4s ease;
+}
+.buy-button {
+  all: unset;
+  position: absolute;
+  background-color: rgb(124 58 237);
+  padding: 0.5rem 1.25rem;
+  top: 100%;
+  font-size: 1.3rem;
+  border-radius: 30px;
+  transition: all 0.4s ease;
+  visibility: hidden;
+  cursor: pointer;
+}
+.discover-card:hover .buy-button {
+  visibility: visible;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.4s ease;
+}
+.discover-card:hover .nft-image {
+  transform: scale(1.1);
+}
+
+.details {
+  padding-top: 0.5rem;
+}
+.owner {
+  display: flex;
+  gap: 0.2rem;
+  object-fit: contain;
+  object-position: center;
+}
+.icon {
+  border-radius: 50%;
+}
+.owner p,
+.price-details p {
+  color: rgb(255 255 255 / 0.7);
+}
+.details h3 {
+  margin: 0.8rem 0;
+}
+.price-details {
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgb(30 41 59);
+  border-radius: 0.5rem;
+  padding: 0 0.5rem;
+}
+.discover-card:hover {
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 5px 13px #374151;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.5s;
+  transform: translateY(-10px);
+}

@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  gap: 1rem;
+  color: white;
+}
+.logo {
+  /* flex: 2; */
+}
+.logo h1 {
+  margin: 0;
+  padding: 0;
+}
+.nav-links {
+  /* flex: 4; */
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.link {
+  text-decoration: none;
+  color: white;
+}
+.wallet {
+  /* flex: 2;
+  text-align: right; */
+}

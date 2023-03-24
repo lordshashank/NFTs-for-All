@@ -1,0 +1,59 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: grid;
+  place-items: center;
+  background-color: rgb(15 23 42 / 0.5);
+  z-index: 100;
+}
+.modal {
+  background-color: rgb(15 23 42);
+  color: white;
+  width: 400px;
+  border-radius: 10px;
+  z-index: 200;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(31 41 55);
+  padding: 1rem 1.5rem;
+}
+.modal h3 {
+  margin: 0;
+}
+.close-button {
+  all: unset;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 2rem;
+}
+.form-field input {
+  all: unset;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgb(31 41 55);
+  border-radius: 100px;
+}
+.button {
+  all: unset;
+  background-color: rgb(124 58 237);
+  padding: 0.5rem 1.25rem;
+  font-size: 1.3rem;
+  border-radius: 30px;
+  text-align: center;
+}
+@media (width < 500px) {
+  .modal {
+    width: 250px;
+  }
+}
