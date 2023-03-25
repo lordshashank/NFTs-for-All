@@ -1,5 +1,6 @@
 import express from "express";
 import { routes } from "./routes";
+import { db } from "./database/db";
 
 const app = express();
 
@@ -21,6 +22,12 @@ app.use((req, res, next) => {
 
 routes.forEach((route) => app[route.method](route.path, route.handler));
 
-app.listen(8000, () => {
-  console.log("Server is listening on Port 8000");
-});
+const uri = process.env.MONGODB_URI;
+
+const start = async () => {
+  await db.connect(uri);
+  app.listen(8000, () => {
+    console.log("Server is listening on Port 8000");
+  });
+};
+start();

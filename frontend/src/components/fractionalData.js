@@ -3,7 +3,7 @@ import useWeb3 from "./useWeb3";
 import { abi } from "../../constants";
 import { useWeb3Contract } from "react-moralis";
 
-const useFractionalData = (contractAddress) => {
+const useFractionalData = () => {
   const [fractionalDataLoading, setFractionalDataLoading] = useState(true);
   const { userAccount, web3, connectWeb3, Moralis } = useWeb3();
   const { runContractFunction: getPrice } = useWeb3Contract({});
@@ -12,7 +12,7 @@ const useFractionalData = (contractAddress) => {
   const { runContractFunction: owner } = useWeb3Contract({});
   const { runContractFunction: changePrice } = useWeb3Contract({});
 
-  const price = async () => {
+  const price = async (contractAddress) => {
     // console.log("start");
     const parameters = {
       abi: abi.fractionalNft,
@@ -33,7 +33,7 @@ const useFractionalData = (contractAddress) => {
     return Number(result);
   };
 
-  const nftAddress = async () => {
+  const nftAddress = async (contractAddress) => {
     const parameters = {
       abi: abi.fractionalNft,
       contractAddress: contractAddress,
@@ -53,7 +53,7 @@ const useFractionalData = (contractAddress) => {
     return result;
   };
 
-  const tokenId = async () => {
+  const tokenId = async (contractAddress) => {
     const parameters = {
       abi: abi.fractionalNft,
       contractAddress: contractAddress,
@@ -69,11 +69,10 @@ const useFractionalData = (contractAddress) => {
         console.log(error);
       },
     });
-    console.log(result);
     return Number(result);
   };
 
-  const ownerOf = async () => {
+  const ownerOf = async (contractAddress) => {
     const parameters = {
       abi: abi.fractionalNft,
       contractAddress: contractAddress,
@@ -93,7 +92,7 @@ const useFractionalData = (contractAddress) => {
     return result;
   };
 
-  const setPrice = async (newPrice) => {
+  const setPrice = async (newPrice, contractAddress) => {
     if ((await ownerOf()) !== userAccount) {
       return "You are not the owner of this fractional NFT";
     }

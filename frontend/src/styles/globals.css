@@ -26,6 +26,7 @@ body {
 }
 .page {
   padding: 0 5rem;
+  color: white;
 }
 .wallet-connect-button {
   all: unset;
@@ -61,4 +62,7 @@ body {
   to {
     transform: rotate(359deg);
   }
+}
+.page-content {
+  margin-top: 1rem;
 }

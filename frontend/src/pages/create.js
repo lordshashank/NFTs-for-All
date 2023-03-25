@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useWeb3Contract } from "react-moralis";
 import { abi, contractAddress } from "../../constants";
-import useWeb3 from "@/components/useWeb3";
 // import Moralis from "./api/moralis/[...moralis]";
 import NavBar from "@/components/navigation/navBar";
 const Create = () => {
@@ -10,7 +9,6 @@ const Create = () => {
   const [traits, setTraits] = useState("");
   const [file, setFile] = useState(null);
   // const [tokenUri, setTokenUri] = useState("");
-  const { userAccount, web3, connectWeb3, Moralis } = useWeb3();
 
   const { runContractFunction: mintNft } = useWeb3Contract({});
 

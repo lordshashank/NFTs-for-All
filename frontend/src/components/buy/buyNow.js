@@ -34,7 +34,6 @@ const BuyNow = ({
     setIsCheckout(false);
     setIsFractionalize(false);
   };
-  const loader = nftData.isNoLoader ? null : () => nftData.rawMetaData.image;
   return (
     <div className={`page ${classes["buyNow-page"]}`}>
       <NavBar />
@@ -59,19 +58,27 @@ const BuyNow = ({
         <div className={classes["left-box"]}>
           <div>
             <MediaRenderer
-              loader={loader}
-              src={nftData.rawMetaData.image}
+              src={nftData.rawMetadata.image}
               // src={nft}
-              className={classes.nft}
-              width={100}
-              height={100}
+              // className={classes.nft}
+              style={{
+                width: "100%",
+                aspectRatio: "1/1",
+                objectFit: "fill",
+                height: "auto",
+              }}
               alt=""
             />
             <div className={classes.details}>
               <p>Contract Address</p>
               <h3 className={classes.contract}>{nftData.contract.address}</h3>
-              <p>Token Id</p>
-              <h3>{nftData.tokenId}</h3>
+              {nftData.isToken && (
+                <>
+                  <p>Token Id</p>
+                  <h3>{nftData.tokenId}</h3>
+                </>
+              )}
+
               <p>Blockchain</p>
               <h3>ETH</h3>
               {nftData.partsAvailable && (
@@ -93,8 +100,8 @@ const BuyNow = ({
           </div>
         </div>
         <div className={classes["right-box"]}>
-          <h2>{nftData.rawMetaData.name}</h2>
-          <p>{nftData.rawMetaData.description}</p>
+          <h2>{nftData.rawMetadata.name}</h2>
+          <p>{nftData.rawMetadata.description}</p>
           <p className={classes["price-text"]}>Market Price</p>
           <h3>0.01 ETH = $ 16.029</h3>
           <button
