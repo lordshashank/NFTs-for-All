@@ -12,6 +12,7 @@ const buyNow = () => {
   const { tokenId } = router.query;
 
   const nftData = useSelector((state) => state.deals.passData);
+  console.log(nftData);
   const { userAccount } = useWeb3();
   const [time, setTime] = useState(0);
   // let buyPrice;
@@ -86,7 +87,7 @@ const buyNow = () => {
       <BuyNow
         showInput={false}
         onCheckout={checkoutBuy}
-        nftData={nftData[tokenId - 1]}
+        nftData={nftData[tokenId]}
       />
       ;
       {/* <button

@@ -31,8 +31,9 @@ contract SubscriptionNft is ERC721, Ownable {
         s_subscriptionPrice = _subscriptionPrice;
         s_subscriptionDuration = _subscriptionDuration;
         s_nftCount = nftCount;
-        s_nftId = 0;
+        s_nftId = 1;
         TOKEN_URI = tokenUri;
+        _safeMint(msg.sender, 0);
     }
 
     function subscribe() public payable {
