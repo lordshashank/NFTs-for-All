@@ -1,18 +1,13 @@
 // This script demonstrates access to the NFT API via the Alchemy SDK.
-import { Network, Alchemy } from "alchemy-sdk";
+import { alchemyProvider } from "./alchemy";
 import { contractAddress } from "../../constants";
 import dotenv from "dotenv";
 dotenv.config();
 
 export async function getNftData(nftContractAddress) {
-  let x;
+  const { alchemy } = alchemyProvider();
   console.log("nftContractAddress", nftContractAddress);
-  const settings = {
-    apiKey: process.env.ALCHEMY_API_KEY, // Replace with your Alchemy API Key.
-    network: Network.MATIC_MUMBAI, // Replace with your network.
-  };
 
-  const alchemy = new Alchemy(settings);
   async function nft() {
     // Print owner's wallet address:
     const ownerAddr = contractAddress.owner;

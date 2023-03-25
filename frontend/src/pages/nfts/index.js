@@ -14,10 +14,10 @@ import { dealsActions } from "@/store/deals";
 import { useSelector } from "react-redux";
 const items = [{}, {}, {}, {}, {}];
 const Nfts = () => {
-  const { isLoading } = useFetchData(
-    "http://localhost:8000/nft-data",
-    dealsActions.addNftsData
-  );
+  const { isLoading, fetchData } = useFetchData();
+  useEffect(() => {
+    fetchData("http://localhost:8000/nft-data", dealsActions.addNftsData);
+  }, []);
 
   const nftData = useSelector((state) => state.deals.nftsData);
   const { web3, userAccount, connectWallet, isWeb3Enabled, Moralis } =

@@ -10,7 +10,7 @@ export const getPopulatedNftData = async (contractAddress) => {
         name: data.contract.name,
         symbol: data.contract.symbol,
       },
-      rawMetaData: data.rawMetadata,
+      rawMetadata: data.rawMetadata,
       tokenId: nftTokenId[i].token,
     });
   });

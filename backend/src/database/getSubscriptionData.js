@@ -1,11 +1,8 @@
-const { MongoClient } = require("mongodb");
-const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri);
+import { db } from "./db";
 
 export const getSubscriptionData = async (data) => {
   try {
-    await client.connect();
-    const database = client.db("NFA");
+    const database = db.getConnection();
     const collection = database.collection("subscriptionNfts");
     // Find document for owner
     const query = { owner: data.owner };
@@ -21,7 +18,5 @@ export const getSubscriptionData = async (data) => {
   } catch (error) {
     console.log(error);
     throw error;
-  } finally {
-    await client.close();
   }
 };

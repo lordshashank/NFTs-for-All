@@ -18,9 +18,7 @@ const Create = () => {
   const [nftCount, setNftCount] = useState("5");
   const { getURI, getOwner, getSubscriptionPrice, getSubscription } =
     useSubscriptionData("0x332Ac661475bA28867165b969341f74145BC76d9");
-  // const { price } = useFractionalData(
-  //   "0x0d209B74975d10943e69b1e4a4aE6c68d9ad2c29"
-  // );
+  const { price, tokenId } = useFractionalData();
   // const [tokenUri, setTokenUri] = useState("");
   const { userAccount, web3, connectWeb3, Moralis } = useWeb3();
   const provider = new Web3(Web3.givenProvider);
@@ -108,22 +106,21 @@ const Create = () => {
       console.log(error);
     }
 
-    // try {
-    //   // if (!tokenUri) {
-    //   //   console.log("no token uri");
-    //   //   return;
-    //   // }
-    //   newContract = await deployContract(data.Uri[0]);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // try {
-    //    const response = await sendContractInfo(newContract);\
-    //    console.log(response);
-    // }
-    // catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      // if (!tokenUri) {
+      //   console.log("no token uri");
+      //   return;
+      // }
+      newContract = await deployContract(data.Uri[0]);
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      const response = await sendContractInfo(newContract);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
     try {
       const parameters = {
         abi: abi.subscriptionNft,
@@ -157,7 +154,7 @@ const Create = () => {
   };
 
   return (
-    <div>
+    <div style={{ color: "white" }}>
       <NavBar />
       <form onSubmit={handleSubmit}>
         <div>
@@ -251,7 +248,11 @@ const Create = () => {
       >
         deployContract
       </button>
-      <button onClick={async () => console.log(await getSubscription())}>
+      <button
+        onClick={async () =>
+          console.log(await price("0x0d209B74975d10943e69b1e4a4aE6c68d9ad2c29"))
+        }
+      >
         Mint
       </button>
     </div>

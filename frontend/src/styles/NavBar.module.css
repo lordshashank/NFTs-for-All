@@ -5,6 +5,7 @@
   padding: 1rem 0;
   gap: 1rem;
   color: white;
+  z-index: 100;
 }
 .logo {
   /* flex: 2; */
@@ -21,9 +22,57 @@
 }
 .link {
   text-decoration: none;
-  color: white;
+  color: rgb(255 255 255 / 0.5);
+}
+.link:hover {
+  color: rgb(124 58 237);
 }
 .wallet {
   /* flex: 2;
   text-align: right; */
+}
+
+.hover-me {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: rgb(255 255 255 / 0.5);
+}
+.create-links {
+  position: relative;
+}
+.create-links:hover .hover-me {
+  color: rgb(124 58 237);
+}
+.create-links > ul {
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+  width: fit-content;
+  position: absolute;
+  border-radius: 5px;
+  background-color: rgb(15 23 42);
+  /* transition: all 0.3s ease-in-out; */
+  animation: fade-in 0.3s linear;
+}
+.create-links > ul > li {
+  padding: 1rem 1rem 0 1rem;
+}
+.create-links > ul > li:hover {
+  color: rgb(124 58 237);
+  cursor: pointer;
+}
+.create-links > ul > li a {
+  all: unset;
+  white-space: nowrap;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

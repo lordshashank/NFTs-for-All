@@ -3,48 +3,81 @@ import NavBar from "@/components/navigation/navBar";
 import classes from "@/styles/Explore.module.css";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { useMoralis } from "react-moralis";
+import { useFetchData } from "../api/useFetchData";
+import { dealsActions } from "@/store/deals";
 import useWeb3 from "@/components/useWeb3";
+import useTokenId from "@/components/useTokenId";
+import { useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
 const Fractional = () => {
+  const dispatch = useDispatch();
   const nftData = useSelector((state) => state.deals.fractionalData);
+  const fractionalData = useSelector((state) => state.deals.fractionalDataB);
+  const contract = useSelector((state) => state.deals.contract);
   const router = useRouter();
   const { userAccount } = useWeb3();
-  const getFractionalData = async () => {
+  const { isLoading, fetchData } = useFetchData();
+  const { tokenIds } = useTokenId();
+  useEffect(() => {
+    const laodFractionalData = async () => {
+      await fetchData(
+        "http://localhost:8000/fractional-contracts",
+        dealsActions.addContract
+      );
+    };
+    laodFractionalData();
+  }, []);
+  console.log(contract);
+  // useEffect(() => {
+  //   if (userAccount) {
+  //     const url = `http://localhost:8000/get-fractional-contracts/${userAccount}`;
+  //     fetchData(url, dealsActions.addContract);
+  //   }
+  // }, [userAccount]);
+  useEffect(() => {
+    if (tokenIds !== [] && tokenIds !== null && tokenIds !== "undefined") {
+      getFractionalData();
+    }
+  }, [tokenIds]);
+
+  const getFractionalData = useCallback(async () => {
     console.log(1.1);
     try {
-      const response = await fetch(
-        "http://localhost:8000/get-fractional-contracts",
-        {
-          method: "POST",
-          body: JSON.stringify({ owner: userAccount }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      console.log(tokenIds);
+      const response = await fetch("http://localhost:8000/fractional-data", {
+        method: "POST",
+        body: JSON.stringify({ tokenIds: tokenIds }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const resData = await response.json();
       console.log(resData);
+      dispatch(dealsActions.addFractionalData({ fractionalData: resData }));
     } catch (error) {
       console.error(error);
     }
-  };
+  });
 
   return (
     <div className={`page ${classes["explore-page"]}`}>
       <NavBar />
       <div className={classes.box}>
         <h1>Explore Fractional Items</h1>
-        <div className={classes["items"]}>
-          {nftData.map((item) => (
-            <DiscoverItemsItem
-              onBuyNow={() => {
-                router.push(`/fractional/buy-now/${item.tokenId}`);
-              }}
-              nftData={item}
-            />
-          ))}
-        </div>
-        <button onClick={getFractionalData}>Get Fractional Data</button>
+        {fractionalData !== [] && (
+          <div className={classes["items"]}>
+            {fractionalData.map((item) => (
+              <DiscoverItemsItem
+                key={item.contract.address}
+                onBuyNow={() => {
+                  router.push(`/fractional/buy-now/${item.tokenId}`);
+                }}
+                nftData={item}
+              />
+            ))}
+          </div>
+        )}
+        {/* <button onClick={getFractionalData}>Get Fractional Data</button> */}
       </div>
     </div>
   );
