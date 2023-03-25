@@ -70,4 +70,5 @@ contract FractionalNft is ERC20, Ownable {
     }
 
     receive() external payable {}
+    // fallback() external payable {}
 }
