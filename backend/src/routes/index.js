@@ -5,6 +5,13 @@ import { getFractionalContracts } from "./getFractionalContracts.js";
 import { createNftRoute } from "./createNftRoute.js";
 import { saveSubscriptionDataRoute } from "./saveSubscriptionDataRoute.js";
 import { getSubscriptionContracts } from "./getSubscriptionContracts.js";
+import { getContractRoute } from "./getContractRoute";
+import { getFractionalNftsData } from "./getFractionalNftsDataRoute";
+import { getAllNftsRoute } from "./getAllNftsRoute";
+import { getAllFractionalContractsRoute } from "./getAllFractionalNftsRoute";
+import { getAllSubscriptionalContractsRoute } from "./getAllSubscriptionalContractsRoute";
+import { getAllSubscriptionalNftsRoute } from "./getAllSubscriptionalNftsRoute";
+import { getProfileNftsRoute } from "./getProfileNtsRoute";
 export const routes = [
   getNftsDataRoute,
   getPassNftsDataRoute,
@@ -13,4 +20,11 @@ export const routes = [
   createNftRoute,
   saveSubscriptionDataRoute,
   getSubscriptionContracts,
+  getContractRoute,
+  getFractionalNftsData,
+  getAllNftsRoute,
+  getAllFractionalContractsRoute,
+  getAllSubscriptionalContractsRoute,
+  getAllSubscriptionalNftsRoute,
+  getProfileNftsRoute,
 ];

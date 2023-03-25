@@ -4,12 +4,13 @@ import { useRouter } from "next/router";
 import { useFetchData } from "@/pages/api/useFetchData";
 import { useSelector } from "react-redux";
 import { dealsActions } from "@/store/deals";
+import { useEffect } from "react";
 
 const DiscoverItems = () => {
-  const { isLoading } = useFetchData(
-    "http://localhost:8000/nft-data",
-    dealsActions.addNftsData
-  );
+  const { isLoading, fetchData } = useFetchData();
+  useEffect(() => {
+    fetchData("http://localhost:8000/all-nfts", dealsActions.addNftsData);
+  }, []);
   const nftData = useSelector((state) => state.deals.nftsData);
   const router = useRouter();
 

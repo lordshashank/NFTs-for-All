@@ -6,15 +6,19 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useFetchData } from "../api/useFetchData";
 import useWeb3 from "@/components/useWeb3";
+import { useEffect } from "react";
 const Pass = () => {
-  const { isLoading } = useFetchData(
-    "http://localhost:8000/pass-data",
-    dealsActions.addPassData
-  );
+  const { isLoading, fetchData } = useFetchData();
+  useEffect(() => {
+    fetchData(
+      "http://localhost:8000/subscriptional-nfts",
+      dealsActions.addPassData
+    );
+  }, []);
   const { userAccount } = useWeb3();
   const passData = useSelector((state) => state.deals.passData);
-  console.log(passData);
   const router = useRouter();
+  console.log(passData);
   const buyNow = () => {
     router.push("/pass/buy-now");
   };

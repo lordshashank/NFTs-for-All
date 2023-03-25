@@ -1,24 +1,17 @@
 import classes from "../../styles/DiscoverItems.module.css";
-import Image from "next/image";
-import logo from "../../../public/logo.jpg";
-import nft from "../../../public/1.jpg";
-import useWeb3 from "../useWeb3";
-import Link from "next/link";
-import virat from "../../../public/virat.jpeg";
 import { MediaRenderer } from "@thirdweb-dev/react";
 
 const DiscoverItemsItem = ({ onBuyNow, nftData }) => {
   const loader = nftData.isNoLoader ? null : () => nftData.rawMetaData.image;
+  console.log(nftData);
   return (
     <div className={classes["discover-card"]}>
       <div className={classes.nft}>
         <MediaRenderer
-          loader={loader}
-          src={nftData.rawMetaData.image}
+          src={nftData.rawMetadata.image}
           className={classes["nft-image"]}
-          width={100}
-          height={100}
           alt=""
+          style={{ width: "100%", height: "auto", objectFit: "fill" }}
         />
         <button className={classes["buy-button"]} onClick={onBuyNow}>
           Buy Now
@@ -27,14 +20,14 @@ const DiscoverItemsItem = ({ onBuyNow, nftData }) => {
       <div className={classes.details}>
         <div className={classes.owner}>
           <MediaRenderer
-            loader={loader}
-            src={nftData.rawMetaData.image}
+            src={nftData.rawMetadata.image}
             alt=""
             width={50}
             height={50}
+            style={{ objectFit: "fill" }}
             className={classes.icon}
           />
-          <p>ICC</p>
+          <p>{nftData.rawMetadata.name}</p>
         </div>
         <h3 className={classes.title}>{nftData.contract.name}</h3>
         <div className={classes["price-details"]}>

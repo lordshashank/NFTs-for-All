@@ -19,7 +19,7 @@ const buyNow = () => {
   const router = useRouter();
   const { tokenId } = router.query;
 
-  const nftData = useSelector((state) => state.deals.fractionalData);
+  const nftData = useSelector((state) => state.deals.fractionalDataB);
 
   // const
   // prev: 0x84d8ca9213dad74f15Dcb74c7830B95C453c9fe1

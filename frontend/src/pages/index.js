@@ -10,6 +10,7 @@ import NavBar from "@/components/navigation/navBar";
 import useWeb3 from "../components/useWeb3";
 import DiscoverItems from "@/components/home/DiscoverItems";
 import { useRouter } from "next/router";
+import Page from "@/components/Page";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -107,10 +108,7 @@ export default function Home() {
     // <WalletConnect />
 
     // <div>token counter is {tokenCounter}</div>
-    <div className={`page ${classes.home}`}>
-      {/* <button onClick={async () => await deployContract()}>deploy</button> */}
-
-      <NavBar />
+    <Page>
       <div className={classes.intro}>
         <h1>
           Discover rate <br /> Collection or{" "}
@@ -127,6 +125,6 @@ export default function Home() {
         </button>
       </div>
       <DiscoverItems />
-    </div>
+    </Page>
   );
 }

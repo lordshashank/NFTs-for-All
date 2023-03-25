@@ -7,7 +7,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   const { deployer } = await getNamedAccounts();
 
   log("----------------------------------------------------");
-  arguments = ["check", "10000000000000000", "100000", "10", "ipfs://"];
+  arguments = ["NFTS", "10000000000000000", "100000", "10", "ipfs://"];
   const subscriptionNft = await deploy("SubscriptionNft", {
     from: deployer,
     args: arguments,
