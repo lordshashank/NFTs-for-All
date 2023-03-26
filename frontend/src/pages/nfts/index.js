@@ -12,6 +12,7 @@ import Moralis from "../api/moralis/[...moralis]";
 import { useFetchData } from "../api/useFetchData";
 import { dealsActions } from "@/store/deals";
 import { useSelector } from "react-redux";
+import Loading from "@/components/ui/Loading";
 const items = [{}, {}, {}, {}, {}];
 const Nfts = () => {
   const { isLoading, fetchData } = useFetchData();
@@ -89,21 +90,24 @@ const Nfts = () => {
       <NavBar />
       <div className={classes.box}>
         <h1>Explore Nfts Items</h1>
-        <div className={classes["items"]}>
-          {isLoading ? (
-            <div className="spinner"></div>
-          ) : (
-            nftData.map((item) => (
+        {isLoading ? (
+          <div className="spinner">
+            <Loading />
+          </div>
+        ) : (
+          <div className={classes["items"]}>
+            {nftData.map((item) => (
               <DiscoverItemsItem
+                key={item.contract.address}
                 onBuyNow={() => {
-                  router.push(`/nfts/buy-now/${item.tokenId}`);
+                  router.push(`/fractional/buy-now/${item.tokenId}`);
                 }}
                 nftData={item}
               />
-            ))
-          )}
-          {/* <div>{price}</div> */}
-        </div>
+            ))}
+          </div>
+        )}
+        {/* <div>{price}</div> */}
       </div>
     </div>
   );

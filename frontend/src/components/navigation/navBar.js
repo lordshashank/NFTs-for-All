@@ -5,6 +5,9 @@ import useWeb3 from "../useWeb3";
 import { AiOutlineDown } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import logo from "@/../public/logo.jpeg";
+
 const NavBar = () => {
   const router = useRouter();
   const [showLinks, setShowLinks] = useState(false);
@@ -22,7 +25,12 @@ const NavBar = () => {
   return (
     <header className={classes.header}>
       <div className={classes.logo}>
-        <h1>Logo</h1>
+        <Image
+          src={logo}
+          width={60}
+          height={60}
+          style={{ borderRadius: "100px" }}
+        />
       </div>
       <nav className={classes["nav-links"]}>
         <Link style={isActive("/")} className={classes.link} href="/">
@@ -74,8 +82,21 @@ const NavBar = () => {
           </div>
         )}
       </nav>
-
-      <div className={classes.wallet}>
+      <div className={classes["profile-wallet"]}>
+        <Link
+          href={"/profile"}
+          style={{ all: "unset", padding: "0", margin: "0", cursor: "pointer" }}
+        >
+          <Image
+            loader={() =>
+              "https://shreethemes.in/giglink/layouts/assets/images/avatar/1.jpg"
+            }
+            src="https://shreethemes.in/giglink/layouts/assets/images/avatar/1.jpg"
+            width={50}
+            height={50}
+            style={{ borderRadius: "100px" }}
+          />
+        </Link>
         <WalletConnect />
       </div>
     </header>

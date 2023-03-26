@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useFetchData } from "../api/useFetchData";
 import useWeb3 from "@/components/useWeb3";
 import { useEffect } from "react";
+import Loading from "@/components/ui/Loading";
 const Pass = () => {
   const { isLoading, fetchData } = useFetchData();
   useEffect(() => {
@@ -47,21 +48,24 @@ const Pass = () => {
       <NavBar />
       <div className={classes.box}>
         <h1>Explore Pass Items</h1>
-        <div className={classes["items"]}>
-          {isLoading ? (
-            <div className="spinner"></div>
-          ) : (
-            passData.map((item) => (
+        {isLoading ? (
+          <div className="spinner">
+            <Loading />
+          </div>
+        ) : (
+          <div className={classes["items"]}>
+            {passData.map((item) => (
               <DiscoverItemsItem
+                key={item.contract.address}
                 onBuyNow={() => {
-                  router.push(`/pass/buy-now/${item.tokenId}`);
+                  router.push(`/fractional/buy-now/${item.tokenId}`);
                 }}
                 nftData={item}
               />
-            ))
-          )}
-          {passData.length === 0 && !isLoading && <h1>No Data Found.</h1>}
-        </div>
+            ))}
+          </div>
+        )}
+        {passData.length === 0 && !isLoading && <h1>No Data Found.</h1>}
 
         <button onClick={getSubscriptionData}>Get Subscription Data</button>
       </div>
