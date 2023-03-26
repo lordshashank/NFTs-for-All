@@ -1,15 +1,17 @@
-const { assert } = require("chai");
+const { assert, expect } = require("chai");
+const { BigNumber } = require("ethers");
 const { network, deployments, ethers } = require("hardhat");
 const { developmentChains } = require("../../helper-hardhat-config");
 
 !developmentChains.includes(network.name)
   ? describe.skip
   : describe("Fractional NFT Unit Tests", function () {
-      let basicNft, deployer, accounts, TOKEN_URI, fractionalNft;
+      let basicNft, deployer, accounts, TOKEN_URI, buyer, fractionalNft;
 
       beforeEach(async () => {
         accounts = await ethers.getSigners();
         deployer = accounts[0];
+        buyer = accounts[1];
         await deployments.fixture(["fractionalnft"]);
         basicNft = await ethers.getContract("BasicNft");
         fractionalNft = await ethers.getContract("FractionalNft");
@@ -42,4 +44,89 @@ const { developmentChains } = require("../../helper-hardhat-config");
       //       assert.equal(tokenURI, TOKEN_URI);
       //     });
       //   });
+
+      // test 02
+      describe("Mint tokens", async () => {
+        it("should revert if the the number of tokens to be minted is zero", async () => {
+          await expect(fractionalNft.mintTokens(0)).to.be.revertedWith(
+            "zeroValue"
+          );
+        });
+        it("Should add up the number of minted tokens to the user's account", async () => {
+          const initialBalance = await fractionalNft.balanceOf(
+            deployer.address
+          );
+          const amount = 1000;
+          await fractionalNft.connect(deployer).mintTokens(amount);
+          const finalBalance = await fractionalNft.balanceOf(deployer.address);
+          expect(finalBalance.sub(initialBalance)).to.equal(amount);
+        });
+      });
+      // test 03
+      describe("Change Price", async () => {
+        it("reverts if the user tries to change price to zero", async () => {
+          await expect(fractionalNft.changePrice(0)).to.be.revertedWith(
+            "zeroValue"
+          );
+        });
+        it("should set the new price if it greater than zero", async () => {
+          const newPrice = ethers.utils.parseEther("0.1");
+          await fractionalNft.changePrice(newPrice);
+          const price = await fractionalNft.getPrice();
+          assert.equal(newPrice.toString(), price.toString());
+        });
+      });
+      // test 04
+      // describe("buyTokens", async () => {
+      //   beforeEach(async () => {
+      //     const amount = 1000;
+      //     const sPrice = await fractionalNft.getPrice();
+      //     await fractionalNft.mintTokens(amount);
+      //     await fractionalNft.changePrice(sPrice);
+      //   });
+        // it("should allow users to buy tokens and increase their balance", async () => {
+        //   const amountToMint = 1000;
+        //   const sPrice1 = await fractionalNft.getPrice();
+        //   await fractionalNft.mintTokens(amountToMint);
+        //   await fractionalNft.changePrice(sPrice1);
+
+        //   const amount = 10;
+        //   const sPrice = await fractionalNft.getPrice();
+
+        //   const ethToSend = BigNumber.from(amount).mul(sPrice);
+
+        //   const initialContractBalance = await ethers.provider.getBalance(
+        //     fractionalNft.address
+        //   );
+        //   const initialUserBalance = await fractionalNft.balanceOf(
+        //     buyer.address
+        //   );
+
+        //   await fractionalNft.connect(buyer).buyTokens(amount);
+
+        //   await expect(() =>
+        //     buyer.sendTransaction({
+        //       to: fractionalNft.address,
+        //       value: ethToSend,
+        //     })
+        //   ).to.changeEtherBalance(
+        //     deployer,
+        //     BigNumber.from(0).sub(BigNumber.from(ethToSend))
+        //   );
+
+        //   const finalContractBalance = await ethers.provider.getBalance(
+        //     fractionalNft.address
+        //   );
+        //   const finalUserBalance = await fractionalNft.balanceOf(
+        //     deployer.address
+        //   );
+
+        //   expect(
+        //     finalContractBalance.sub(initialContractBalance).toString()
+        //   ).to.equal(ethToSend.toString());
+        //   expect(finalUserBalance.sub(initialUserBalance).toString()).to.equal(
+        //     amount.toString()
+        //   );
+        // });
+      // });
     });
