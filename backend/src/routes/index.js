@@ -11,7 +11,7 @@ import { getAllNftsRoute } from "./getAllNftsRoute";
 import { getAllFractionalContractsRoute } from "./getAllFractionalNftsRoute";
 import { getAllSubscriptionalContractsRoute } from "./getAllSubscriptionalContractsRoute";
 import { getAllSubscriptionalNftsRoute } from "./getAllSubscriptionalNftsRoute";
-import { getProfileNftsRoute } from "./getProfileNtsRoute";
+import { getProfileNftsRoute } from "./getProfileNftsRoute";
 export const routes = [
   getNftsDataRoute,
   getPassNftsDataRoute,

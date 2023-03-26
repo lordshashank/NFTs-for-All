@@ -6,7 +6,7 @@ export const getAllNfts = async () => {
     const nftsForOwner = await alchemy.nft.getNftsForContract(
       contractAddress.nft
     );
-    return nftsForOwner.ownedNfts;
+    return nftsForOwner.nfts;
   } catch (err) {
     console.log(err);
   }

@@ -17,7 +17,7 @@ const profilesSlice = createSlice({
       state.fractionalNfts = action.payload.fractionalData || [];
     },
     addContract(state, action) {
-      state.contracts = action.payload.nftsData;
+      state.contracts = action.payload.nftsData || [];
       console.log(action.payload.nftsData);
       console.log(state.contracts);
     },

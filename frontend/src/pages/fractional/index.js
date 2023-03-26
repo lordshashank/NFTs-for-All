@@ -13,7 +13,6 @@ import Loading from "@/components/ui/Loading";
 import { id } from "ethers/lib/utils";
 const Fractional = () => {
   const dispatch = useDispatch();
-  const nftData = useSelector((state) => state.deals.fractionalData);
   const fractionalData = useSelector((state) => state.deals.fractionalDataB);
   const contracts = useSelector((state) => state.deals.contracts);
   const router = useRouter();

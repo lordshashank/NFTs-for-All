@@ -4,13 +4,13 @@ import { contractAddress } from "../../constants";
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function getNftData(nftContractAddress) {
+export async function getNftData(ownerAddr) {
   const { alchemy } = alchemyProvider();
+  const nftContractAddress = contractAddress.nft;
   console.log("nftContractAddress", nftContractAddress);
 
   async function nft() {
     // Print owner's wallet address:
-    const ownerAddr = contractAddress.owner;
     console.log("fetching NFTs for address:", ownerAddr);
     console.log("...");
 

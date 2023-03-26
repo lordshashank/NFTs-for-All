@@ -4,6 +4,7 @@ import { useFetchData } from "@/pages/api/useFetchData";
 import useTokenId from "../useTokenId";
 import { useDispatch, useSelector } from "react-redux";
 import { profilesActions } from "@/store/profile";
+import { dealsActions } from "@/store/deals";
 import { useEffect, useCallback } from "react";
 import Loading from "../ui/Loading";
 import classes from "@/styles/Explore.module.css";
@@ -13,15 +14,15 @@ const ProfileFractional = () => {
   const dispatch = useDispatch();
   const { userAccount } = useWeb3();
   const { isLoading, fetchData } = useFetchData();
-  const contracts = useSelector((state) => state.profile.contracts);
+  const contracts = useSelector((state) => state.deals.contracts);
   console.log(contracts);
-  const { tokenIds } = useTokenId("profile");
-  const fractionalNfts = useSelector((state) => state.profile.fractionalNfts);
+  const { tokenIds } = useTokenId("deals");
+  const fractionalNfts = useSelector((state) => state.deals.fractionalDataB);
   console.log(fractionalNfts);
   useEffect(() => {
     if (userAccount) {
       const url = `http://localhost:8000/get-fractional-contracts/${userAccount}`;
-      fetchData(url, profilesActions.addContract);
+      fetchData(url, dealsActions.addContract);
     }
   }, [userAccount]);
 
