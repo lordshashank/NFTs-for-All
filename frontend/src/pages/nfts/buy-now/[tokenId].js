@@ -9,6 +9,7 @@ import Web3 from "web3";
 import React from "react";
 const buyNow = () => {
   const router = useRouter();
+  console.log(router.asPath);
   const { tokenId } = router.query;
   const { account } = useMoralis();
   // console.log(account);

@@ -1,11 +1,18 @@
-import { getPopulatedNftData } from "../alchemy/getPopulateNftData";
-import { contractAddress } from "../../constants";
+import { getAllNfts } from "../alchemy/getAllNfts";
 
 export const getNftsDataRoute = {
   method: "get",
   path: "/nft-data",
   handler: async (req, res) => {
-    const nftData = await getPopulatedNftData(contractAddress.nft);
-    res.status(200).json(nftData);
+    try {
+      const nfts = await getAllNfts();
+      console.log(nfts);
+      return res.json(nfts);
+    } catch (err) {
+      console.log(err);
+      res.status(400).json({
+        error: err,
+      });
+    }
   },
 };
