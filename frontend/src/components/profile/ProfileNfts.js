@@ -5,6 +5,7 @@ import DiscoverItemsItem from "../home/DiscoverItemsItem";
 import { useFetchData } from "@/pages/api/useFetchData";
 import useWeb3 from "../useWeb3";
 import { profilesActions } from "@/store/profile";
+import { dealsActions } from "@/store/deals";
 import { useSelector } from "react-redux";
 import Loading from "../ui/Loading";
 
@@ -12,13 +13,13 @@ const ProfileNfts = () => {
   const { isLoading, fetchData } = useFetchData();
   const { userAccount } = useWeb3();
   console.log(userAccount);
-  const nfts = useSelector((state) => state.profile.nfts);
+  const nfts = useSelector((state) => state.deals.nftsData);
   console.log(nfts);
   useEffect(() => {
     const loadData = () => {
       const url = `http://localhost:8000/profile-nfts/${userAccount}`;
       const url1 = `http://localhost:8000/profile-nfts/0x9299eac94952235Ae86b94122D2f7c77F7F6Ad30`;
-      fetchData(url1, profilesActions.addNftsData);
+      fetchData(url1, dealsActions.addNftsData);
     };
     if (userAccount) {
       loadData();

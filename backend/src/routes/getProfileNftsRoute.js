@@ -5,7 +5,6 @@ export const getProfileNftsRoute = {
   handler: async (req, res) => {
     const { userAccount } = req.params;
     const nftData = await getPopulatedNftData(userAccount);
-
-    res.json(nftData);
+    res.status(200).json(nftData);
   },
 };
