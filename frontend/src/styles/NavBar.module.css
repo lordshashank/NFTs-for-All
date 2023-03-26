@@ -68,6 +68,11 @@
   all: unset;
   white-space: nowrap;
 }
+.profile-wallet {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 @keyframes fade-in {
   from {
     opacity: 0;

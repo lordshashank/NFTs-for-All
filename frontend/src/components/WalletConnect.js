@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
+import { BiWallet } from "react-icons/bi";
 
 const WalletConnect = (props) => {
   const buttonClassName = props.buttonClassName;
@@ -64,9 +65,9 @@ const WalletConnect = (props) => {
               // window.localStorage.setItem("connected", "walletconnect")
             }
           }}
-          className="wallet-connect-button"
+          className="wallet-disconnect"
         >
-          <span>Disconnect Wallet</span>
+          <BiWallet style={{ color: "white" }} size={28} />
         </button>
       ) : (
         <button
@@ -83,9 +84,9 @@ const WalletConnect = (props) => {
             }
           }}
           disabled={isWeb3EnableLoading}
-          className="wallet-connect-button"
+          className="wallet-connect"
         >
-          <span>Connect Wallet</span>
+          <BiWallet style={{ color: "#aaa" }} size={28} />
         </button>
       )}
     </nav>
