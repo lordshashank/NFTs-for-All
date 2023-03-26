@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialProfilesState = {
   nfts: [],
+  fractionalNfts: [],
+  contracts: [],
 };
 
 const profilesSlice = createSlice({
@@ -10,6 +12,14 @@ const profilesSlice = createSlice({
   reducers: {
     addNftsData(state, action) {
       state.nfts = action.payload.nftsData || [];
+    },
+    addFractionalData(state, action) {
+      state.fractionalNfts = action.payload.fractionalData || [];
+    },
+    addContract(state, action) {
+      state.contracts = action.payload.nftsData;
+      console.log(action.payload.nftsData);
+      console.log(state.contracts);
     },
   },
 });

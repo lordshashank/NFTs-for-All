@@ -13,7 +13,7 @@ import { BsFillPersonPlusFill } from "react-icons/bs";
 const Profile = () => {
   const [selectedBackground, setSelectedBackground] = useState(null);
   const [selectedProfile, setSelectedProfile] = useState(null);
-  const [activeComponent, setActiveComponent] = useState("component1");
+  const [activeComponent, setActiveComponent] = useState("nft");
 
   const handleButtonClick = (componentName) => {
     setActiveComponent(componentName);

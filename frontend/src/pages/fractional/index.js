@@ -9,15 +9,17 @@ import useWeb3 from "@/components/useWeb3";
 import useTokenId from "@/components/useTokenId";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import Loading from "@/components/ui/Loading";
+import { id } from "ethers/lib/utils";
 const Fractional = () => {
   const dispatch = useDispatch();
   const nftData = useSelector((state) => state.deals.fractionalData);
   const fractionalData = useSelector((state) => state.deals.fractionalDataB);
-  const contract = useSelector((state) => state.deals.contract);
+  const contracts = useSelector((state) => state.deals.contracts);
   const router = useRouter();
   const { userAccount } = useWeb3();
   const { isLoading, fetchData } = useFetchData();
-  const { tokenIds } = useTokenId();
+  const { tokenIds } = useTokenId("deals");
   useEffect(() => {
     const laodFractionalData = async () => {
       await fetchData(
@@ -27,7 +29,7 @@ const Fractional = () => {
     };
     laodFractionalData();
   }, []);
-  console.log(contract);
+  console.log(contracts);
   // useEffect(() => {
   //   if (userAccount) {
   //     const url = `http://localhost:8000/get-fractional-contracts/${userAccount}`;
@@ -64,7 +66,11 @@ const Fractional = () => {
       <NavBar />
       <div className={classes.box}>
         <h1>Explore Fractional Items</h1>
-        {fractionalData !== [] && (
+        {isLoading ? (
+          <div className="spinner">
+            <Loading />
+          </div>
+        ) : (
           <div className={classes["items"]}>
             {fractionalData.map((item) => (
               <DiscoverItemsItem

@@ -28,13 +28,30 @@ body {
   padding: 0 5rem;
   color: white;
 }
-.wallet-connect-button {
+.wallet-connect {
   all: unset;
-  background-color: rgb(15 23 42);
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  /* background-color: rgb(15 23 42);
   border: 1px solid;
   padding: 0.5rem 1.25rem;
   border-radius: 10px;
-  width: fit-content;
+  width: fit-content; */
+}
+.wallet-disconnect {
+  all: unset;
+  background-color: rgb(124 58 237);
+  padding: 0.5rem;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 @media (width < 800px) {
   .page {
@@ -42,27 +59,11 @@ body {
   }
 }
 .spinner {
-  width: 30px;
-  height: 30px;
-  border-top: 4px solid white;
-  border-radius: 100%;
-  border-left: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  border-right: 4px solid transparent;
-  animation: rotate 0.8s infinite;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
 }
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-}
+
 .page-content {
   margin-top: 1rem;
 }

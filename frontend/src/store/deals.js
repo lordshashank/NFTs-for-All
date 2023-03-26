@@ -23,7 +23,7 @@ const initialDealsState = {
     },
   ],
   fractionalDataB: [],
-  contract: [],
+  contracts: [],
 };
 
 const dealsSlice = createSlice({
@@ -46,7 +46,7 @@ const dealsSlice = createSlice({
         parseInt(action.payload.parts);
     },
     addContract(state, action) {
-      state.contract = action.payload.nftsData;
+      state.contracts = action.payload.nftsData;
       console.log(action.payload.nftsData);
     },
     addFractionalData(state, action) {

@@ -2,9 +2,9 @@ import useFractionalData from "./fractionalData";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-const useTokenId = () => {
+const useTokenId = (store) => {
   const [tokenIds, setTokenIds] = useState([]);
-  const contracts = useSelector((state) => state.deals.contract);
+  const contracts = useSelector((state) => state[store].contracts);
   const { tokenId: getTokenId } = useFractionalData();
   useEffect(() => {
     const loadTokenId = async () => {
@@ -15,7 +15,7 @@ const useTokenId = () => {
       );
       setTokenIds(response);
     };
-    if (contracts !== [] && contracts !== null && contracts !== "undefined") {
+    if (contracts !== [] && contracts !== null && contracts !== undefined) {
       loadTokenId();
     }
   }, [contracts]);
