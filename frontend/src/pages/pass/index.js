@@ -67,7 +67,7 @@ const Pass = () => {
         )}
         {passData.length === 0 && !isLoading && <h1>No Data Found.</h1>}
 
-        <button onClick={getSubscriptionData}>Get Subscription Data</button>
+        {/* <button onClick={getSubscriptionData}>Get Subscription Data</button> */}
       </div>
     </div>
   );

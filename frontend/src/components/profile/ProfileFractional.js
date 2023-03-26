@@ -9,8 +9,10 @@ import { useEffect, useCallback } from "react";
 import Loading from "../ui/Loading";
 import classes from "@/styles/Explore.module.css";
 import DiscoverItemsItem from "../home/DiscoverItemsItem";
+import { useRouter } from "next/router";
 
 const ProfileFractional = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { userAccount } = useWeb3();
   const { isLoading, fetchData } = useFetchData();

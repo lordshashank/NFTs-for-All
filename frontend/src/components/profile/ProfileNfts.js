@@ -8,8 +8,10 @@ import { profilesActions } from "@/store/profile";
 import { dealsActions } from "@/store/deals";
 import { useSelector } from "react-redux";
 import Loading from "../ui/Loading";
+import { useRouter } from "next/router";
 
 const ProfileNfts = () => {
+  const router = useRouter();
   const { isLoading, fetchData } = useFetchData();
   const { userAccount } = useWeb3();
   console.log(userAccount);
@@ -18,8 +20,8 @@ const ProfileNfts = () => {
   useEffect(() => {
     const loadData = () => {
       const url = `http://localhost:8000/profile-nfts/${userAccount}`;
-      const url1 = `http://localhost:8000/profile-nfts/0x9299eac94952235Ae86b94122D2f7c77F7F6Ad30`;
-      fetchData(url1, dealsActions.addNftsData);
+      // const url1 = `http://localhost:8000/profile-nfts/0x9299eac94952235Ae86b94122D2f7c77F7F6Ad30`;
+      fetchData(url, dealsActions.addNftsData);
     };
     if (userAccount) {
       loadData();
@@ -41,7 +43,7 @@ const ProfileNfts = () => {
             <DiscoverItemsItem
               key={item.contract.address}
               onBuyNow={() => {
-                router.push(`/fractional/buy-now/${item.tokenId}`);
+                router.push(`/nfts/buy-now/${item.tokenId}`);
               }}
               nftData={item}
             />
