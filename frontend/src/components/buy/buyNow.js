@@ -118,7 +118,7 @@ const BuyNow = ({
               Fractionalize
             </button>
           )}
-          <button onClick={check}>check</button>
+          {/* <button onClick={check}>check</button> */}
         </div>
       </div>
     </div>

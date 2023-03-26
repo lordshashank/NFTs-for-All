@@ -58,7 +58,7 @@ const Pass = () => {
               <DiscoverItemsItem
                 key={item.contract.address}
                 onBuyNow={() => {
-                  router.push(`/fractional/buy-now/${item.tokenId}`);
+                  router.push(`/pass/buy-now/${item.tokenId}`);
                 }}
                 nftData={item}
               />

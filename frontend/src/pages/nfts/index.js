@@ -100,7 +100,7 @@ const Nfts = () => {
               <DiscoverItemsItem
                 key={item.contract.address}
                 onBuyNow={() => {
-                  router.push(`/fractional/buy-now/${item.tokenId}`);
+                  router.push(`/nfts/buy-now/${item.tokenId}`);
                 }}
                 nftData={item}
               />
