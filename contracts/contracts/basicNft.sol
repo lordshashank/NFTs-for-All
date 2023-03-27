@@ -57,7 +57,7 @@ contract BasicNft is ERC721 {
         if (!onSale[tokenId]) {
             revert TokenNotOnSale();
         }
-
+ 
         if (msg.value < price[tokenId]) {
             revert InsufficientBalance();
         }

@@ -184,7 +184,7 @@ const buyNow = () => {
       >
         Mint NFT
       </button> */}
-      <button
+      {/* <button
         onClick={async () => {
           try {
             // await Moralis.enableWeb3();
@@ -203,7 +203,7 @@ const buyNow = () => {
         }}
       >
         Send Contract Info
-      </button>
+      </button> */}
     </>
   );
 };
