@@ -1,25 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 } from "uuid";
 
 const initialProfilesState = {
-  nfts: [],
-  fractionalNfts: [],
-  contracts: [],
+  notifications: [],
+  showNotification: () => {},
 };
 
 const profilesSlice = createSlice({
   name: "profile",
   initialState: initialProfilesState,
   reducers: {
-    addNftsData(state, action) {
-      state.nfts = action.payload.nftsData || [];
+    showNotification(state, action) {
+      state.notifications = [
+        ...state.notifications,
+        {
+          id: v4(),
+          type: action.payload.type,
+          message: action.payload.message,
+        },
+      ];
     },
-    addFractionalData(state, action) {
-      state.fractionalNfts = action.payload.fractionalData || [];
-    },
-    addContract(state, action) {
-      state.contracts = action.payload.nftsData || [];
-      console.log(action.payload.nftsData);
-      console.log(state.contracts);
+    removeNotification(state, action) {
+      const id = action.payload.id;
+      const updatedNotification = state.notifications.filter(
+        (notification) => notification.id !== id
+      );
+      state.notifications = updatedNotification;
     },
   },
 });

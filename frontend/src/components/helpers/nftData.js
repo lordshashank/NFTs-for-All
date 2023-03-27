@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import useWeb3 from "./useWeb3";
-import { contractAddress, abi } from "../../constants";
+import useWeb3 from "../hooks/useWeb3";
+import { contractAddress, abi } from "../../../constants";
 import { useWeb3Contract } from "react-moralis";
 const useNFTData = () => {
   // const [price, setPrice] = useState(0);

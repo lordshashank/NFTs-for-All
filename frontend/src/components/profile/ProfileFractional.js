@@ -1,7 +1,7 @@
 import React from "react";
-import useWeb3 from "../useWeb3";
+import useWeb3 from "../hooks/useWeb3";
 import { useFetchData } from "@/pages/api/useFetchData";
-import useTokenId from "../useTokenId";
+import useTokenId from "../hooks/useTokenId";
 import { useDispatch, useSelector } from "react-redux";
 import { profilesActions } from "@/store/profile";
 import { dealsActions } from "@/store/deals";
@@ -9,8 +9,10 @@ import { useEffect, useCallback } from "react";
 import Loading from "../ui/Loading";
 import classes from "@/styles/Explore.module.css";
 import DiscoverItemsItem from "../home/DiscoverItemsItem";
+import { useRouter } from "next/router";
 
 const ProfileFractional = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { userAccount } = useWeb3();
   const { isLoading, fetchData } = useFetchData();

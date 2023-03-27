@@ -6,8 +6,10 @@ import { useState } from "react";
 import Checkout from "@/components/ui/Checkout";
 import Fractionalize from "../ui/Fractionalize.js";
 import { contractAddress } from "../../../constants";
-import useNFTData from "@/components/nftData";
+import useNFTData from "@/components/helpers/nftData";
 import { MediaRenderer } from "@thirdweb-dev/react";
+import { useRouter } from "next/router";
+import useSubscriptionData from "../helpers/subscriptionData";
 
 const BuyNow = ({
   showInput,
@@ -16,6 +18,8 @@ const BuyNow = ({
   onFractionalize,
   showFractionalize,
 }) => {
+  const router = useRouter();
+  const { getWithdraw } = useSubscriptionData(nftData.contract.address);
   console.log(nftData);
   const { price, onSale, ownerOf, sell, unsell, getURI, currentTokenId } =
     useNFTData();
@@ -100,7 +104,17 @@ const BuyNow = ({
           </div>
         </div>
         <div className={classes["right-box"]}>
-          <h2>{nftData.rawMetadata.name}</h2>
+          <div>
+            <h2>{nftData.rawMetadata.name}</h2>
+            {router.pathname.includes("pass") && (
+              <button
+                onClick={getWithdraw}
+                className={`${classes.button} ${classes.buttonTop}`}
+              >
+                Withdraw
+              </button>
+            )}
+          </div>
           <p>{nftData.rawMetadata.description}</p>
           <p className={classes["price-text"]}>Market Price</p>
           <h3>0.01 ETH = $ 16.029</h3>
@@ -118,7 +132,6 @@ const BuyNow = ({
               Fractionalize
             </button>
           )}
-          <button onClick={check}>check</button>
         </div>
       </div>
     </div>

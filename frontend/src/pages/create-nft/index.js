@@ -1,6 +1,6 @@
-import Page from "@/components/Page";
+import ProfileTemplate from "@/components/ui/ProfileTemplate";
 import { useState } from "react";
-import NftForm from "@/components/NftForm";
+import NftForm from "@/components/create/NftForm";
 import { abi, contractAddress } from "../../../constants";
 import { useWeb3Contract } from "react-moralis";
 const Create = () => {
@@ -75,7 +75,7 @@ const Create = () => {
   };
 
   return (
-    <Page>
+    <ProfileTemplate>
       <NftForm
         file={file}
         setFile={setFile}
@@ -84,7 +84,7 @@ const Create = () => {
         submitHandler={handleSubmit}
         isExtraFields={false}
       />
-    </Page>
+    </ProfileTemplate>
   );
 };
 

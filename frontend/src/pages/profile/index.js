@@ -1,5 +1,5 @@
-import React from "react";
-import Page from "@/components/Page";
+import React, { use, useEffect } from "react";
+import Page from "@/components/ui/Page";
 import classes from "@/styles/Profile.module.css";
 import { useState } from "react";
 import ProfileNfts from "@/components/profile/ProfileNfts";
@@ -9,11 +9,47 @@ import Image from "next/image";
 import { GoVerified } from "react-icons/go";
 import { IoMdSettings } from "react-icons/io";
 import { BsFillPersonPlusFill } from "react-icons/bs";
+import { useFetch } from "@/components/hooks/useFetch";
+import useWeb3 from "@/components/hooks/useWeb3";
+import { useDispatch } from "react-redux";
+import { profilesActions } from "@/store/profile";
+const defaultProfile = {
+  url: "https://shreethemes.in/giglink/layouts/assets/images/blog/single.jpg",
+  name: "Jenny Jimenez",
+};
+import { useRouter } from "next/router";
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [selectedBackground, setSelectedBackground] = useState(null);
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [activeComponent, setActiveComponent] = useState("nft");
+  const [profile, setProfile] = useState(defaultProfile);
+  const { userAccount } = useWeb3();
+  // const { isLoading, data: profileData } = useFetch(
+  //   `http://localhost:8000/profile/${userAccount}`
+  // );
+  console.log(profile);
+
+  useEffect(() => {
+    if (userAccount) {
+      getUserProfile();
+    }
+  }, [userAccount]);
+
+  const getUserProfile = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/profile/${userAccount}`
+      );
+      const profileData = await response.json();
+      console.log(profileData);
+      setProfile(profileData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleButtonClick = (componentName) => {
     setActiveComponent(componentName);
@@ -24,6 +60,14 @@ const Profile = () => {
       return classes.active;
     }
     return "";
+  };
+  const showNotification = () => {
+    dispatch(
+      profilesActions.showNotification({
+        type: "SUCCESS",
+        message: "CHECKING WITH REDUX",
+      })
+    );
   };
 
   const submit = async () => {
@@ -60,10 +104,8 @@ const Profile = () => {
             }}
           />
           <Image
-            loader={() =>
-              "https://shreethemes.in/giglink/layouts/assets/images/avatar/1.jpg"
-            }
-            src="https://shreethemes.in/giglink/layouts/assets/images/avatar/1.jpg"
+            loader={() => profile.url}
+            src={profile.url}
             className={classes["rounded-full"]}
             id="profile-image"
             alt="profile"
@@ -71,28 +113,34 @@ const Profile = () => {
             height={100}
           />
         </div>
-        <div className={classes["profile"]}>
+        {/* <div className={classes["profile"]}>
           <div className={classes["group-profile-pic"]}>
             <div className={classes["profile-image"]}>
               <div className={classes["backdrop-image"]}></div>
               <label htmlFor="pro-img"></label>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className={classes["profile-data"]}>
           <h5 className={classes["text"]}>
-            Jenny Jimenez <GoVerified style={{ color: "green" }} />
+            {profile.name}
+            <GoVerified style={{ color: "green" }} />
           </h5>
           <p className={classes["text-slate"]}>
             Created by{" "}
             <span className={classes["text-id"]}>1x5484dcdvcdscds56c4</span>
           </p>
           <div className={classes["profile-bar"]}>
-            <button>+ Follow me</button>
+            <button onClick={showNotification}>+ Follow me</button>
             <div className={classes["profile-bara-data"]}>
               <BsFillPersonPlusFill style={{ color: "white" }} />
             </div>
-            <IoMdSettings style={{ color: "#7c3aed" }} />
+            <IoMdSettings
+              onClick={() => {
+                router.push("/profile/edit");
+              }}
+              style={{ color: "#7c3aed", cursor: "pointer" }}
+            />
           </div>
         </div>
       </div>

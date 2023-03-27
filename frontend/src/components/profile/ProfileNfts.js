@@ -3,13 +3,15 @@ import classes from "@/styles/Explore.module.css";
 import { useState } from "react";
 import DiscoverItemsItem from "../home/DiscoverItemsItem";
 import { useFetchData } from "@/pages/api/useFetchData";
-import useWeb3 from "../useWeb3";
+import useWeb3 from "../hooks/useWeb3";
 import { profilesActions } from "@/store/profile";
+import { useRouter } from "next/router";
 import { dealsActions } from "@/store/deals";
 import { useSelector } from "react-redux";
 import Loading from "../ui/Loading";
 
 const ProfileNfts = () => {
+  const router = useRouter();
   const { isLoading, fetchData } = useFetchData();
   const { userAccount } = useWeb3();
   console.log(userAccount);
@@ -41,7 +43,7 @@ const ProfileNfts = () => {
             <DiscoverItemsItem
               key={item.contract.address}
               onBuyNow={() => {
-                router.push(`/fractional/buy-now/${item.tokenId}`);
+                router.push(`/nfts/buy-now/${item.tokenId}`);
               }}
               nftData={item}
             />

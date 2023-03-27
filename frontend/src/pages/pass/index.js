@@ -5,9 +5,10 @@ import classes from "@/styles/Explore.module.css";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useFetchData } from "../api/useFetchData";
-import useWeb3 from "@/components/useWeb3";
+import useWeb3 from "@/components/hooks/useWeb3";
 import { useEffect } from "react";
 import Loading from "@/components/ui/Loading";
+
 const Pass = () => {
   const { isLoading, fetchData } = useFetchData();
   useEffect(() => {

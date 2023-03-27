@@ -4,7 +4,7 @@ import classes from "@/styles/Explore.module.css";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
-import useWeb3 from "@/components/useWeb3";
+import useWeb3 from "@/components/hooks/useWeb3";
 import { abi, contractAddress, bytecode } from "../../../constants";
 import { useMoralis, useWeb3Contract } from "react-moralis";
 import { ethers } from "ethers";

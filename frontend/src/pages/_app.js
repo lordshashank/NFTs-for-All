@@ -5,6 +5,7 @@ import NavBar from "@/components/navigation/navBar";
 import { Provider } from "react-redux";
 import store from "@/store";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
+import Notifications from "@/components/contexts/Notifications";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }) {
       <MoralisProvider initializeOnMount={false}>
         <Provider store={store}>
           {/* <NotificationProvider> */}
+          <Notifications />
           <Component {...pageProps} />
         </Provider>
         {/* </NotificationProvider> */}

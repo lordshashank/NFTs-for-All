@@ -1,5 +1,5 @@
 import BuyNow from "@/components/buy/buyNow";
-import useWeb3 from "@/components/useWeb3";
+import useWeb3 from "@/components/hooks/useWeb3";
 import { useEffect, useState } from "react";
 import { abi, contractAddress, bytecode } from "../../../../constants";
 import { useMoralis, useWeb3Contract } from "react-moralis";
@@ -10,8 +10,8 @@ import { useSelector } from "react-redux";
 const buyNow = () => {
   const router = useRouter();
   const { tokenId } = router.query;
-
   const nftData = useSelector((state) => state.deals.passData);
+
   console.log(nftData);
   const { userAccount } = useWeb3();
   const [time, setTime] = useState(0);

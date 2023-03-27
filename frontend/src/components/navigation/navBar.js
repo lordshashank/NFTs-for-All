@@ -1,7 +1,7 @@
-import WalletConnect from "../WalletConnect";
+import WalletConnect from "./WalletConnect";
 import classes from "../../styles/NavBar.module.css";
 import Link from "next/link";
-import useWeb3 from "../useWeb3";
+import useWeb3 from "../hooks/useWeb3";
 import { AiOutlineDown } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -30,6 +30,7 @@ const NavBar = () => {
           width={60}
           height={60}
           style={{ borderRadius: "100px" }}
+          alt=""
         />
       </div>
       <nav className={classes["nav-links"]}>
@@ -93,6 +94,7 @@ const NavBar = () => {
             }
             src="https://shreethemes.in/giglink/layouts/assets/images/avatar/1.jpg"
             width={50}
+            alt=""
             height={50}
             style={{ borderRadius: "100px" }}
           />

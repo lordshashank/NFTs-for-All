@@ -1,5 +1,5 @@
 import BuyNow from "@/components/buy/buyNow";
-import useWeb3 from "@/components/useWeb3";
+import useWeb3 from "@/components/hooks/useWeb3";
 import { useEffect, useInsertionEffect, useState } from "react";
 import { abi, contractAddress, bytecode } from "../../../../constants";
 import { useMoralis, useWeb3Contract } from "react-moralis";

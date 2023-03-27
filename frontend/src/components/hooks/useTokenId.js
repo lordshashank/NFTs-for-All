@@ -1,4 +1,4 @@
-import useFractionalData from "./fractionalData";
+import useFractionalData from "../helpers/fractionalData";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 

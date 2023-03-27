@@ -1,6 +1,6 @@
 import classes from "@/styles/Checkout.module.css";
 import { useState } from "react";
-import useWeb3 from "../useWeb3";
+import useWeb3 from "../hooks/useWeb3";
 const Fractionalize = ({ onClose, onFractionalize, token, tokenId }) => {
   const [initialSupply, setInitialSupply] = useState("");
 

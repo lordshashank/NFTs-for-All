@@ -1,10 +1,11 @@
-import Page from "@/components/Page";
+import Page from "@/components/ui/Page";
 import { useState } from "react";
-import NftForm from "@/components/NftForm";
+import NftForm from "@/components/create/NftForm";
 import Web3 from "web3";
-import useWeb3 from "@/components/useWeb3";
+import useWeb3 from "@/components/hooks/useWeb3";
 import { useWeb3Contract } from "react-moralis";
 import { abi, bytecode } from "constants";
+import ProfileTemplate from "@/components/ui/ProfileTemplate";
 const CreateSubscriptional = () => {
   const [file, setFile] = useState(null);
   const [values, setValues] = useState({
@@ -137,7 +138,7 @@ const CreateSubscriptional = () => {
   };
 
   return (
-    <Page>
+    <ProfileTemplate>
       <NftForm
         file={file}
         setFile={setFile}
@@ -146,7 +147,7 @@ const CreateSubscriptional = () => {
         submitHandler={handleSubmit}
         isExtraFields={true}
       />
-    </Page>
+    </ProfileTemplate>
   );
 };
 
