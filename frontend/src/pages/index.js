@@ -6,7 +6,6 @@ import { abi, contractAddress, bytecode } from "../../constants";
 import { useMoralis, useWeb3Contract } from "react-moralis";
 import NavBar from "@/components/navigation/navBar";
 // import Web3 from "@alch/alchemy-web3";
-
 import useWeb3 from "../components/hooks/useWeb3";
 import DiscoverItems from "@/components/home/DiscoverItems";
 import { useRouter } from "next/router";

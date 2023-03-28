@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styles from "@/styles/Notification.module.css";
-import { profilesActions } from "@/store/profile";
+import { notificationActions } from "@/store/notification";
 
 const colors = {
   SUCCESS: "#2ecc71",
@@ -36,7 +36,7 @@ const Notification = (props) => {
       setExit(true);
       handlePauseTimer();
       setTimeout(() => {
-        dispatch(profilesActions.removeNotification({ id: props.id }));
+        dispatch(notificationActions.removeNotification({ id: props.id }));
         // setNotification((prev) => prev.filter((note) => note.id !== props.id));
       }, 400);
     }

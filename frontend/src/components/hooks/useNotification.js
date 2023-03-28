@@ -1,11 +1,11 @@
-import { useContext } from "react";
-import { Context } from "../contexts/NotificationProvider";
+import { notificationActions } from "@/store/notification";
+import { useDispatch } from "react-redux";
 
 const useNotification = () => {
-  const { onPresent } = useContext(Context);
+  const dispatch = useDispatch();
 
   const showNotification = (modalContent) => {
-    onPresent(modalContent);
+    dispatch(notificationActions.showNotification(modalContent));
   };
   return { showNotification };
 };

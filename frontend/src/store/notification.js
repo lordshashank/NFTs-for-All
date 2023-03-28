@@ -1,14 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 } from "uuid";
 
-const initialProfilesState = {
+const initialNotificationState = {
   notifications: [],
-  showNotification: () => {},
 };
 
-const profilesSlice = createSlice({
+const notificationSlice = createSlice({
   name: "profile",
-  initialState: initialProfilesState,
+  initialState: initialNotificationState,
   reducers: {
     showNotification(state, action) {
       state.notifications = [
@@ -30,6 +29,6 @@ const profilesSlice = createSlice({
   },
 });
 
-export const profilesActions = profilesSlice.actions;
+export const notificationActions = notificationSlice.actions;
 
-export default profilesSlice.reducer;
+export default notificationSlice.reducer;

@@ -1,15 +1,12 @@
 import classes from "@/styles/buyNow.module.css";
-import Image from "next/image";
-import virat from "../../../public/virat.jpeg";
 import NavBar from "@/components/navigation/navBar";
-import { useState } from "react";
-import Checkout from "@/components/ui/Checkout";
-import Fractionalize from "../ui/Fractionalize.js";
+import Checkout from "@/components/Providers/Checkout";
+import Fractionalize from "../Providers/Fractionalize.js";
 import { contractAddress } from "../../../constants";
-import useNFTData from "@/components/helpers/nftData";
 import { MediaRenderer } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import useSubscriptionData from "../helpers/subscriptionData";
+import useModal from "../hooks/useModal.js";
 
 const BuyNow = ({
   showInput,
@@ -20,44 +17,20 @@ const BuyNow = ({
 }) => {
   const router = useRouter();
   const { getWithdraw } = useSubscriptionData(nftData.contract.address);
-  console.log(nftData);
-  const { price, onSale, ownerOf, sell, unsell, getURI, currentTokenId } =
-    useNFTData();
-  // const tokenId = currentTok1
 
-  async function check() {
-    // console.log(await price(1));
-    // console.log(await onSale(1));
-    console.log(await ownerOf(1));
-    // console.log(await getURI(1));
-  }
-  // check();
-  const [isCheckout, setIsCheckout] = useState(false);
-  const [isFractionalize, setIsFractionalize] = useState(false);
-  const onClose = () => {
-    setIsCheckout(false);
-    setIsFractionalize(false);
-  };
+  const { handlePresent } = useModal(
+    <Checkout showInput={showInput} onCheckout={onCheckout} />
+  );
+  const { handlePresent: handlePresentFractionalize } = useModal(
+    <Fractionalize
+      onFractionalize={onFractionalize}
+      token={nftData.contract.address}
+      tokenId={nftData.tokenId}
+    />
+  );
   return (
     <div className={`page ${classes["buyNow-page"]}`}>
       <NavBar />
-      {isCheckout && (
-        <Checkout
-          onClose={onClose}
-          showInput={showInput}
-          onCheckout={onCheckout}
-        />
-      )}
-      {isFractionalize && (
-        <Fractionalize
-          onClose={onClose}
-          onFractionalize={onFractionalize}
-          token={nftData.contract.address}
-          tokenId={nftData.tokenId}
-        />
-      )}
-
-      {/* //https://ipfs.io/ipfs${nftData.rawMetaData.image.slice(5)} */}
       <div className={classes["buyNow-page-details"]}>
         <div className={classes["left-box"]}>
           <div>
@@ -118,16 +91,13 @@ const BuyNow = ({
           <p>{nftData.rawMetadata.description}</p>
           <p className={classes["price-text"]}>Market Price</p>
           <h3>0.01 ETH = $ 16.029</h3>
-          <button
-            className={classes.button}
-            onClick={() => setIsCheckout((prev) => !prev)}
-          >
+          <button className={classes.button} onClick={handlePresent}>
             Buy Now
           </button>
           {showFractionalize && (
             <button
-              className={classes.button}
-              onClick={() => setIsFractionalize((prev) => !prev)}
+              className={`${classes.button} ${classes.fractionalize}`}
+              onClick={handlePresentFractionalize}
             >
               Fractionalize
             </button>

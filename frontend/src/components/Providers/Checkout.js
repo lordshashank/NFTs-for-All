@@ -1,10 +1,13 @@
 import classes from "@/styles/Checkout.module.css";
 import { useState } from "react";
-const Checkout = ({ onClose, showInput, onCheckout }) => {
+import { buyNowActions } from "@/store/buyNow";
+import { useDispatch } from "react-redux";
+const Checkout = ({ showInput, onCheckout }) => {
   const [price, setPrice] = useState("");
+  const dispatch = useDispatch();
   const closeHandler = (e) => {
     if (e.target.id == "backdrop") {
-      onClose();
+      dispatch(buyNowActions.onDismiss());
     }
   };
   return (
@@ -12,7 +15,10 @@ const Checkout = ({ onClose, showInput, onCheckout }) => {
       <div className={classes.modal}>
         <div className={classes.heading}>
           <h3>Checkout</h3>
-          <button className={classes["close-button"]} onClick={onClose}>
+          <button
+            className={classes["close-button"]}
+            onClick={() => dispatch(buyNowActions.onDismiss())}
+          >
             X
           </button>
         </div>

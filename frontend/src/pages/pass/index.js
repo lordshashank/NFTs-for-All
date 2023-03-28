@@ -5,9 +5,9 @@ import classes from "@/styles/Explore.module.css";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { useFetchData } from "../api/useFetchData";
-import useWeb3 from "@/components/hooks/useWeb3";
 import { useEffect } from "react";
 import Loading from "@/components/ui/Loading";
+import { v4 } from "uuid";
 
 const Pass = () => {
   const { isLoading, fetchData } = useFetchData();
@@ -17,32 +17,28 @@ const Pass = () => {
       dealsActions.addPassData
     );
   }, []);
-  const { userAccount } = useWeb3();
   const passData = useSelector((state) => state.deals.passData);
   const router = useRouter();
-  console.log(passData);
-  const buyNow = () => {
-    router.push("/pass/buy-now");
-  };
-  const getSubscriptionData = async () => {
-    console.log("started");
-    try {
-      const response = await fetch(
-        "http://localhost:8000/get-Subscription-contracts",
-        {
-          method: "POST",
-          body: JSON.stringify({ owner: userAccount }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const resData = await response.json();
-      console.log(resData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const { userAccount } = useWeb3();
+  // const getSubscriptionData = async () => {
+  //   console.log("started");
+  //   try {
+  //     const response = await fetch(
+  //       "http://localhost:8000/get-Subscription-contracts",
+  //       {
+  //         method: "POST",
+  //         body: JSON.stringify({ owner: userAccount }),
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+  //     const resData = await response.json();
+  //     console.log(resData);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <div className={`page ${classes["explore-page"]}`}>
@@ -57,7 +53,7 @@ const Pass = () => {
           <div className={classes["items"]}>
             {passData.map((item) => (
               <DiscoverItemsItem
-                key={item.contract.address}
+                key={v4()}
                 onBuyNow={() => {
                   router.push(`/pass/buy-now/${item.tokenId}`);
                 }}
@@ -67,8 +63,6 @@ const Pass = () => {
           </div>
         )}
         {passData.length === 0 && !isLoading && <h1>No Data Found.</h1>}
-
-        {/* <button onClick={getSubscriptionData}>Get Subscription Data</button> */}
       </div>
     </div>
   );
