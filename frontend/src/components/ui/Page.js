@@ -1,4 +1,4 @@
-import NavBar from "./navigation/navBar";
+import NavBar from "../navigation/navBar";
 const Page = ({ children }) => {
   return (
     <div className="page">

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useWeb3Contract } from "react-moralis";
 import { abi, contractAddress, bytecode } from "../../constants";
-import useWeb3 from "@/components/useWeb3";
+import useWeb3 from "@/components/hooks/useWeb3";
 import Web3 from "web3";
-import useSubscriptionData from "@/components/subscriptionData";
-import useFractionalData from "@/components/fractionalData";
+import useSubscriptionData from "@/components/helpers/subscriptionData";
+import useFractionalData from "@/components/helpers/fractionalData";
 // import Moralis from "./api/moralis/[...moralis]";
 import NavBar from "@/components/navigation/navBar";
 const Create = () => {

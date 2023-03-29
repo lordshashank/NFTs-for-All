@@ -1,10 +1,13 @@
 import express from "express";
 import { routes } from "./routes";
+import fileUpload from "express-fileupload";
 import { db } from "./database/db";
 
 const app = express();
 
 // body-parser can also be used instead of below two lines
+app.use(express.static(__dirname + "/uploads/"));
+app.use(fileUpload());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {

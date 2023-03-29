@@ -1,19 +1,25 @@
-import React from "react";
-import Page from "@/components/Page";
+import React, { useState } from "react";
+import Page from "@/components/ui/Page";
 import classes from "@/styles/Profile.module.css";
-import { useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/router";
+
 import ProfileNfts from "@/components/profile/ProfileNfts";
 import ProfileFractional from "@/components/profile/ProfileFractional";
 import ProfileSubscription from "@/components/profile/ProfileSubscription";
-import Image from "next/image";
+
 import { GoVerified } from "react-icons/go";
 import { IoMdSettings } from "react-icons/io";
 import { BsFillPersonPlusFill } from "react-icons/bs";
 
+import useUserProfile from "@/components/hooks/useUserProfile";
+import useNotification from "@/components/hooks/useNotification";
+
 const Profile = () => {
-  const [selectedBackground, setSelectedBackground] = useState(null);
-  const [selectedProfile, setSelectedProfile] = useState(null);
+  const router = useRouter();
   const [activeComponent, setActiveComponent] = useState("nft");
+  const { profile } = useUserProfile();
+  const { showNotification } = useNotification();
 
   const handleButtonClick = (componentName) => {
     setActiveComponent(componentName);
@@ -25,19 +31,13 @@ const Profile = () => {
     }
     return "";
   };
-
-  const submit = async () => {
-    const formData = new FormData();
-    formData.append("file", selectedBackground);
-    formData.append("file", selectedProfile);
-    console.log(formData);
-    const response = await uploadFile(
-      `http://10.74.11.54:8000/upload/`,
-      formData
-    );
-    console.log(response);
-    alert("succesfully uploaded photo!");
+  const showCheckNotification = () => {
+    showNotification({
+      type: "SUCCESS",
+      message: "CHECKING WITH REDUX",
+    });
   };
+
   return (
     <Page>
       <div className={classes["upper-box"]}>
@@ -60,10 +60,8 @@ const Profile = () => {
             }}
           />
           <Image
-            loader={() =>
-              "https://shreethemes.in/giglink/layouts/assets/images/avatar/1.jpg"
-            }
-            src="https://shreethemes.in/giglink/layouts/assets/images/avatar/1.jpg"
+            loader={() => profile.url}
+            src={profile.url}
             className={classes["rounded-full"]}
             id="profile-image"
             alt="profile"
@@ -71,28 +69,26 @@ const Profile = () => {
             height={100}
           />
         </div>
-        <div className={classes["profile"]}>
-          <div className={classes["group-profile-pic"]}>
-            <div className={classes["profile-image"]}>
-              <div className={classes["backdrop-image"]}></div>
-              <label htmlFor="pro-img"></label>
-            </div>
-          </div>
-        </div>
         <div className={classes["profile-data"]}>
           <h5 className={classes["text"]}>
-            Jenny Jimenez <GoVerified style={{ color: "green" }} />
+            {profile.name}
+            <GoVerified style={{ color: "green" }} />
           </h5>
           <p className={classes["text-slate"]}>
             Created by{" "}
             <span className={classes["text-id"]}>1x5484dcdvcdscds56c4</span>
           </p>
           <div className={classes["profile-bar"]}>
-            <button>+ Follow me</button>
+            <button onClick={showCheckNotification}>+ Follow me</button>
             <div className={classes["profile-bara-data"]}>
               <BsFillPersonPlusFill style={{ color: "white" }} />
             </div>
-            <IoMdSettings style={{ color: "#7c3aed" }} />
+            <IoMdSettings
+              onClick={() => {
+                router.push("/profile/edit");
+              }}
+              style={{ color: "#7c3aed", cursor: "pointer" }}
+            />
           </div>
         </div>
       </div>

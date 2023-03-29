@@ -1,29 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { contractAddress } from "../../constants";
 
 const initialDealsState = {
   nftsData: [],
   passData: [],
-  fractionalData: [
-    {
-      contract: {
-        name: "CRICKET",
-        symbol: "ICC",
-        address: contractAddress.nft,
-      },
-      rawMetaData: {
-        image: "ipfs://QmQj3M4JvGdNXXvcU1X5aid4ihnSwQeBP5pYbCR1WosHa3",
-        name: "Virat Kohli",
-        description:
-          "Virat Kohli, modern day master, undoubtedly one of the greatest batsman of this era. His records speak for themselves. He is one of the few players in the world who can change the course of a game with his bat in any format at any day. This is the NFT of Virat Kohli in red, i.e. in colors of RCB, the team he admires a lot and has given his best for. He holds record of highest score in an IPL season in these colors only. Hurry up to grab this NFT before it's too late.",
-      },
-      tokenId: 1,
-      partsAvailable: 1000,
-      isNoLoader: true,
-    },
-  ],
-  fractionalDataB: [],
+  fractionalData: [],
   contracts: [],
+  check: false,
+  buyPrice: 0,
 };
 
 const dealsSlice = createSlice({
@@ -50,11 +33,14 @@ const dealsSlice = createSlice({
       console.log(action.payload.nftsData);
     },
     addFractionalData(state, action) {
-      state.fractionalDataB = action.payload.fractionalData || [];
+      state.fractionalData = action.payload.fractionalData || [];
     },
-    // addFileName(state, action) {
-    //   state.fileName = action.payload.fileName;
-    // },
+    setCheck(state, action) {
+      state.check = action.payload.value;
+    },
+    setBuyPrice(state, action) {
+      state.buyPrice = action.payload.value;
+    },
   },
 });
 

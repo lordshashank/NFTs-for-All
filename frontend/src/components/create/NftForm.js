@@ -22,10 +22,6 @@ const NftForm = ({
   };
   return (
     <>
-      <div className={classes["top-section"]}>
-        <div className={classes["background-filter"]}></div>
-        <h2>Upload Your Work</h2>
-      </div>
       <div className={classes["uploads-section"]}>
         <div className={classes["image-section"]}>
           <p>Upload your ART here, Please click "Upload Image" Button </p>
