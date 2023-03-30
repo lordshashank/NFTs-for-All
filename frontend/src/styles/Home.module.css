@@ -18,6 +18,9 @@
   color: transparent;
   background-image: linear-gradient(to left, #dc2626, #7c3aed);
 }
+.font-big {
+  font-size: 5.5rem;
+}
 .intro > p {
   color: rgb(255 255 255 / 0.7);
   font-size: 1.3rem;

@@ -4,6 +4,7 @@ import { MediaRenderer } from "@thirdweb-dev/react";
 const DiscoverItemsItem = ({ onBuyNow, nftData }) => {
   const loader = nftData.isNoLoader ? null : () => nftData.rawMetaData.image;
   console.log(nftData);
+  setTimeout(() => {}, 1000);
   return (
     <div className={classes["discover-card"]}>
       <div className={classes.nft}>

@@ -19,7 +19,7 @@ const ProfileFractional = () => {
   const contracts = useSelector((state) => state.deals.contracts);
   console.log(contracts);
   const { tokenIds } = useTokenId("deals");
-  const fractionalNfts = useSelector((state) => state.deals.fractionalDataB);
+  const fractionalNfts = useSelector((state) => state.deals.fractionalData);
   console.log(fractionalNfts);
   useEffect(() => {
     if (userAccount) {
@@ -48,10 +48,13 @@ const ProfileFractional = () => {
       const resData = await response.json();
       console.log(resData);
       dispatch(profilesActions.addFractionalData({ fractionalData: resData }));
+      console.log(fractionalNfts);
+      // dispatch(dealsActions.addFractionalData({ fractionalData: resData }));
     } catch (error) {
       console.error(error);
     }
   });
+  console.log(fractionalNfts);
   if (!isLoading && fractionalNfts.length === 0) {
     return <h1>Data Not Found</h1>;
   }

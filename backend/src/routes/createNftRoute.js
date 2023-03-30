@@ -36,10 +36,10 @@ export const createNftRoute = {
         `NFT created: Name: ${formData.name}, Description: ${formData.description}, Traits: ${formData.traits}, File path: ${req.file.path}`
       );
 
-      // const response = await createNftUri(formData);
-      const response = [
-        "ipfs://QmUttGTuPbQkuroyGqrX3gS2b9SPdtYvyXLtxZjLHhgGuZ",
-      ];
+      const response = await createNftUri(formData);
+      // const response = [
+      //   "ipfs://QmUttGTuPbQkuroyGqrX3gS2b9SPdtYvyXLtxZjLHhgGuZ",
+      // ];
 
       console.log("here");
       console.log(response);

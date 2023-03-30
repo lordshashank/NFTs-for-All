@@ -111,10 +111,14 @@ export default function Home() {
     <Page>
       <div className={classes.intro}>
         <h1>
-          Discover rate <br /> Collection or{" "}
+          <span className={`${classes["text-bg"]} ${classes["font-big"]}`}>
+            NFA
+          </span>
+          <br />
+          Discover the rarest <br /> Collection or{" "}
           <span className={classes["text-bg"]}>Arts & NFTs</span>
         </h1>
-        <p>We are a huge marketplace dedicated to connecting great artists</p>
+        <p>Your one stop NFT Marketplace Solution</p>
         <button
           className={classes["explore-button"]}
           onClick={() => {

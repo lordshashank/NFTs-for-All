@@ -9,11 +9,13 @@ import Image from "next/image";
 import { GoVerified } from "react-icons/go";
 import { IoMdSettings } from "react-icons/io";
 import { BsFillPersonPlusFill } from "react-icons/bs";
+import useWeb3 from "@/components/useWeb3.js";
 
 const Profile = () => {
   const [selectedBackground, setSelectedBackground] = useState(null);
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [activeComponent, setActiveComponent] = useState("nft");
+  const { userAccount } = useWeb3();
 
   const handleButtonClick = (componentName) => {
     setActiveComponent(componentName);
@@ -84,8 +86,7 @@ const Profile = () => {
             Jenny Jimenez <GoVerified style={{ color: "green" }} />
           </h5>
           <p className={classes["text-slate"]}>
-            Created by{" "}
-            <span className={classes["text-id"]}>1x5484dcdvcdscds56c4</span>
+            Created by <span className={classes["text-id"]}>{userAccount}</span>
           </p>
           <div className={classes["profile-bar"]}>
             <button>+ Follow me</button>
