@@ -21,15 +21,8 @@ export const createNftRoute = {
       `NFT created: Name: ${formData.name}, Description: ${formData.description}, Traits: ${formData.traits}`
     );
 
-<<<<<<< HEAD
-      const response = await createNftUri(formData);
-      // const response = [
-      //   "ipfs://QmUttGTuPbQkuroyGqrX3gS2b9SPdtYvyXLtxZjLHhgGuZ",
-      // ];
-=======
     // const response = await createNftUri(formData);
     const response = ["ipfs://QmUttGTuPbQkuroyGqrX3gS2b9SPdtYvyXLtxZjLHhgGuZ"];
->>>>>>> a83f483e0440e428b632b0aad41bc44189b99c2a
 
     console.log("here");
     console.log(response);
