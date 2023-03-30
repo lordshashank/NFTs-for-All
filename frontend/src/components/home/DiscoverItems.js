@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { dealsActions } from "@/store/deals";
 import { useEffect } from "react";
 import Loading from "../ui/Loading";
+import { v4 } from "uuid";
 
 const DiscoverItems = () => {
   const { isLoading, fetchData } = useFetchData();
@@ -30,6 +31,7 @@ const DiscoverItems = () => {
                 router.push(`/nfts/buy-now/${item.tokenId}`);
               }}
               nftData={item}
+              key={v4()}
             />
           ))}
         </div>

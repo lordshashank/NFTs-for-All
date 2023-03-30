@@ -2,7 +2,7 @@ import { useMoralis } from "react-moralis";
 import Web3 from "web3";
 // import MyContractABI from "./MyContractABI.json";
 // import MyContractBytecode from "./MyContractBytecode.json";
-import Walletconnect from "@/components/WalletConnect";
+import Walletconnect from "@/components/navigation/WalletConnect";
 
 export default function DeployContractButton() {
   const { web3, isWeb3Enabled } = useMoralis();

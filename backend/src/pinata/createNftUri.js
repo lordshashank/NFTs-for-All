@@ -23,7 +23,7 @@ const createNftUri = async (formData) => {
   const { responses: imageUploadResponses, files } = await storeImages(
     imagesLocation
   );
-  console.log("Images uploaded! Uploading token URIs...", imageUploadResponses);
+  console.log("s uploaded! Uploading token URIs...", imageUploadResponses);
   for (let i in imageUploadResponses) {
     let tokenUriMetadata = { ...metadataTemplate };
     tokenUriMetadata.name = formData.name;

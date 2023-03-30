@@ -1,35 +1,5 @@
-.top-section {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 400px;
-  background: url("https://shreethemes.in/giglink/layouts/assets/images/bg/bg1.jpg")
-    bottom;
-  z-index: -1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.top-section h2 {
-  font-size: 1.875rem;
-  font-weight: 500;
-  letter-spacing: 0.025em;
-  z-index: 100;
-}
-.background-filter {
-  background-image: linear-gradient(to bottom, transparent, #0f172a) !important;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
 .uploads-section {
   background-color: rgb(15 23 42);
-  position: absolute;
-  top: 400px;
-  left: 0;
-  right: 0;
-  padding: 5rem;
   display: flex;
   gap: 2rem;
 }
@@ -89,7 +59,7 @@
 .user-input {
   all: unset;
   border-radius: 1rem;
-  border: 1px solid rgb(226 232 240);
+  border: 1px solid rgb(31 41 55);
   background-color: transparent;
   padding: 0.5rem 0.75rem;
   outline: transparent solid 2px;
@@ -97,7 +67,9 @@
   margin-top: 0.5rem;
   color: rgb(226 232 240);
 }
-
+.user-input:focus {
+  border: 1px solid rgb(124 58 237);
+}
 /* @media (width <); */
 
 .image-section ul {

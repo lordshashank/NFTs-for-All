@@ -42,6 +42,21 @@
   font-size: 1.3rem;
   border-radius: 30px;
 }
+.fractionalize {
+  margin-left: 1rem;
+}
+.right-box > div:nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+}
+.buttonTop {
+  align-self: center;
+}
+/* .buttonTop {
+  position: absolute;
+  top: 120px;
+  right: 60px;
+} */
 @media (width <800px) {
   .buyNow-page-details {
     padding: 2rem;

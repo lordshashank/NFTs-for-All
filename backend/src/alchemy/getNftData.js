@@ -18,17 +18,17 @@ export async function getNftData(ownerAddr) {
     const nftsForOwner = await alchemy.nft.getNftsForOwner(
       contractAddress.owner
     );
-    console.log("number of NFTs found:", nftsForOwner.totalCount);
+    // console.log("number of NFTs found:", nftsForOwner.totalCount);
     console.log("...");
     // console.log("nftsForOwner", nftsForOwner);
 
     // Print contract address and tokenId for each NFT:
     let nftTokenId = [];
     for (const nft of nftsForOwner.ownedNfts) {
-      console.log("===");
-      console.log("contract address:", nft.contract.address);
-      console.log("token ID:", nft.tokenId);
-      console.log(nft.contract.address, contractAddress.nft);
+      // console.log("===");
+      // console.log("contract address:", nft.contract.address);
+      // console.log("token ID:", nft.tokenId);
+      // console.log(nft.contract.address, contractAddress.nft);
       var a = nft.contract.address.toString().toLowerCase();
       var b = nftContractAddress.toString().toLowerCase();
       if (a == b) {
@@ -62,7 +62,6 @@ export async function getNftData(ownerAddr) {
         alchemy.nft.getNftMetadata(tokenId.address, tokenId.token)
       )
     );
-    console.log(response);
     return { response, nftTokenId };
   }
   const { response, nftTokenId } = await nft();
