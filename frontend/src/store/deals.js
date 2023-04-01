@@ -7,6 +7,10 @@ const initialDealsState = {
   contracts: [],
   check: false,
   buyPrice: 0,
+  profile: {
+    url: "https://shreethemes.in/giglink/layouts/assets/images/blog/single.jpg",
+    name: "Jenny Jimenez",
+  },
 };
 
 const dealsSlice = createSlice({
@@ -40,6 +44,9 @@ const dealsSlice = createSlice({
     },
     setBuyPrice(state, action) {
       state.buyPrice = action.payload.value;
+    },
+    updateProfile(state, action) {
+      state.profile = action.payload.nftsData;
     },
   },
 });

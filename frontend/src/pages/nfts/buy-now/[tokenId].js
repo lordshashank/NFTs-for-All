@@ -6,28 +6,77 @@ import React from "react";
 import useNftCheckout from "@/components/hooks/useNftCheckout";
 import useFractionalize from "@/components/hooks/useFractionalize";
 import useBuyTokens from "@/components/hooks/useBuyTokens";
+import Fractionalize from "@/components/Providers/Fractionalize";
+import useModal from "@/components/hooks/useModal";
+import classes from "@/styles/buyNow.module.css";
+import Checkout from "@/components/Providers/Checkout";
+import useIsOwner from "@/components/hooks/useIsOwner";
+import useIsOnSale from "@/components/hooks/useIsOnSale";
+import useSellNfts from "@/components/hooks/useSellNfts";
 const buyNow = () => {
   const router = useRouter();
   const { tokenId } = router.query;
-  const nftData = useSelector((state) => state.deals.nftsData);
+  const nftsData = useSelector((state) => state.deals.nftsData);
+  const nftData = nftsData[tokenId - 1];
   const { checkoutBuy } = useNftCheckout(tokenId);
+  const { isOwner } = useIsOwner(tokenId);
+  const { isOnSale } = useIsOnSale(tokenId);
   const fractionalize = useFractionalize();
   useBuyTokens();
-
+  const { sell } = useSellNfts();
   useEffect(() => {
     if (router.asPath === "/nfts/buy-now") {
       router.push("/nfts");
     }
   }, [router]);
 
-  return (
-    <BuyNow
+  const { handlePresent } = useModal(
+    <Checkout
       showInput={false}
-      showFractionalize={true}
       onCheckout={checkoutBuy}
-      onFractionalize={fractionalize}
-      nftData={nftData[Number(tokenId) - 1]}
+      buttonText="Buy"
+      tokenId={tokenId}
     />
+  );
+  const { handlePresent: handlePresentForSell } = useModal(
+    <Checkout
+      showInput={true}
+      onSell={sell}
+      buttonText="Set On Sale"
+      tokenId={tokenId}
+    />
+  );
+  const { handlePresent: handlePresentFractionalize } = useModal(
+    <Fractionalize
+      onFractionalize={fractionalize}
+      token={nftData.contract.address}
+      tokenId={nftData.tokenId}
+    />
+  );
+
+  return (
+    <BuyNow showInput={false} onCheckout={checkoutBuy} nftData={nftData}>
+      {isOwner && !isOnSale && (
+        <>
+          <button className={classes.button} onClick={handlePresentForSell}>
+            Set For Sell
+          </button>
+          <button
+            className={classes.button}
+            onClick={handlePresentFractionalize}
+          >
+            Fractionalize
+          </button>
+        </>
+      )}
+      {!isOwner && isOnSale ? (
+        <button className={classes.button} onClick={handlePresent}>
+          Buy Now
+        </button>
+      ) : (
+        <h1 style={{ color: "#aaa" }}>This is Not for sell</h1>
+      )}
+    </BuyNow>
   );
 };
 export async function getServerSideProps(context) {

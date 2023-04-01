@@ -25,8 +25,13 @@ body {
   ) !important;
 }
 .page {
-  padding: 0 5rem;
+  padding-bottom: 3rem;
   color: white;
+  transition: all 0.2s ease-in-out;
+}
+.page-content {
+  margin-top: 1rem;
+  padding: 0 5rem 3rem 5rem;
 }
 .wallet-connect {
   all: unset;
@@ -53,17 +58,18 @@ body {
   justify-content: center;
   cursor: pointer;
 }
-@media (width < 800px) {
-  .page {
+@media (width < 900px) {
+  .page-content {
     padding: 0 2rem;
+  }
+}
+@media (width < 700px) {
+  .page-content {
+    padding: 0 1rem;
   }
 }
 .spinner {
   display: flex;
   justify-content: center;
   margin-top: 3rem;
-}
-
-.page-content {
-  margin-top: 1rem;
 }

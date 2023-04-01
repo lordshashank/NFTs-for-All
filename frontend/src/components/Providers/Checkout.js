@@ -2,12 +2,17 @@ import classes from "@/styles/Checkout.module.css";
 import { useState } from "react";
 import { buyNowActions } from "@/store/buyNow";
 import { useDispatch } from "react-redux";
-const Checkout = ({ showInput, onCheckout }) => {
+const Checkout = ({ showInput, onSell, onCheckout, buttonText, tokenId }) => {
   const [price, setPrice] = useState("");
   const dispatch = useDispatch();
   const closeHandler = (e) => {
     if (e.target.id == "backdrop") {
       dispatch(buyNowActions.onDismiss());
+    }
+  };
+  const clickHandler = async () => {
+    if (onSell) {
+      onSell(tokenId, price);
     }
   };
   return (
@@ -41,7 +46,7 @@ const Checkout = ({ showInput, onCheckout }) => {
               onCheckout(price);
             }}
           >
-            Buy now
+            {buttonText}
           </button>
         </div>
       </div>

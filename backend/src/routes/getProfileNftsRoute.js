@@ -4,7 +4,9 @@ export const getProfileNftsRoute = {
   path: "/profile-nfts/:userAccount",
   handler: async (req, res) => {
     const { userAccount } = req.params;
-    const nftData = await getPopulatedNftData(userAccount);
-    res.status(200).json(nftData);
+    if (userAccount) {
+      const nftData = await getPopulatedNftData(userAccount);
+      res.status(200).json(nftData);
+    }
   },
 };

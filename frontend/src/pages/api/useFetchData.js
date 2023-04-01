@@ -9,8 +9,9 @@ export const useFetchData = () => {
     try {
       const response = await fetch(url);
       const resData = await response.json();
-      console.log(resData);
-      dispatch(relAction({ nftsData: resData }));
+      if (response.ok) {
+        dispatch(relAction({ nftsData: resData }));
+      }
       setIsLoading(false);
     } catch (e) {
       console.log(e);

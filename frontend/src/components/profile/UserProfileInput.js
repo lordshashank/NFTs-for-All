@@ -5,6 +5,7 @@ import ProfileIconUpload from "./ProfileIconUpload";
 import { uploadFile } from "../helpers/uploadFile";
 import useWeb3 from "../hooks/useWeb3";
 import { useState } from "react";
+import useNotification from "../hooks/useNotification";
 const UserProfileInput = () => {
   const [file, setFile] = useState(null);
   const [values, setValues] = useState({
@@ -13,6 +14,7 @@ const UserProfileInput = () => {
     description: "",
   });
   const { userAccount } = useWeb3();
+  const { showNotification } = useNotification();
   const { firstName, secondName, description } = values;
   const valueChangeHandler = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
@@ -28,8 +30,17 @@ const UserProfileInput = () => {
       "http://localhost:8000/upload/",
       formData
     );
-    console.log(response);
-    alert("succesfully uploaded photo!");
+    const resData = await response.json();
+    if (resData.error) {
+      showNotification({
+        type: "ERROR",
+        message: resData.error,
+      });
+    }
+    showNotification({
+      type: "SUCCESS",
+      message: resData.message,
+    });
   };
 
   console.log(file);

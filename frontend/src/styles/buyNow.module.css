@@ -5,7 +5,6 @@
   display: flex;
   color: white;
   gap: 2rem;
-  padding: 2rem 0;
 }
 .buyNow-page-details > div {
   flex: 0.5;
@@ -40,6 +39,7 @@
   background-color: rgb(124 58 237);
   padding: 0.5rem 1.25rem;
   font-size: 1.3rem;
+  cursor: pointer;
   border-radius: 30px;
 }
 .fractionalize {
@@ -57,11 +57,6 @@
   top: 120px;
   right: 60px;
 } */
-@media (width <800px) {
-  .buyNow-page-details {
-    padding: 2rem;
-  }
-}
 @media (width < 600px) {
   .buyNow-page-details {
     flex-direction: column;
