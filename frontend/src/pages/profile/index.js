@@ -11,7 +11,7 @@ import ProfileSubscription from "@/components/profile/ProfileSubscription";
 import { GoVerified } from "react-icons/go";
 import { IoMdSettings } from "react-icons/io";
 import { BsFillPersonPlusFill } from "react-icons/bs";
-import useWeb3 from "@/components/useWeb3.js";
+import useWeb3 from "@/components/hooks/useWeb3.js";
 
 import useUserProfile from "@/components/hooks/useUserProfile";
 import useNotification from "@/components/hooks/useNotification";
