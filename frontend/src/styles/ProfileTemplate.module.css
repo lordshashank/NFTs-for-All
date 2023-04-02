@@ -40,4 +40,21 @@
   top: 400px;
   left: 0;
   right: 0;
+  padding-bottom: 3rem;
+}
+@media (width < 900px) {
+  .navbar {
+    padding: 0 2rem;
+  }
+  .main-container {
+    padding: 0 2rem 3rem 2rem;
+  }
+}
+@media (width < 700px) {
+  .navbar {
+    padding: 0 1rem;
+  }
+  .main-container {
+    padding: 0 1rem 3rem 1;
+  }
 }

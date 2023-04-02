@@ -8,6 +8,7 @@ import { useFetchData } from "../api/useFetchData";
 import { useEffect } from "react";
 import Loading from "@/components/ui/Loading";
 import { v4 } from "uuid";
+import Page from "@/components/ui/Page";
 
 const Pass = () => {
   const { isLoading, fetchData } = useFetchData();
@@ -41,30 +42,27 @@ const Pass = () => {
   // };
 
   return (
-    <div className={`page ${classes["explore-page"]}`}>
-      <NavBar />
-      <div className={classes.box}>
-        <h1>Explore Pass Items</h1>
-        {isLoading ? (
-          <div className="spinner">
-            <Loading />
-          </div>
-        ) : (
-          <div className={classes["items"]}>
-            {passData.map((item) => (
-              <DiscoverItemsItem
-                key={v4()}
-                onBuyNow={() => {
-                  router.push(`/pass/buy-now/${item.tokenId}`);
-                }}
-                nftData={item}
-              />
-            ))}
-          </div>
-        )}
-        {passData.length === 0 && !isLoading && <h1>No Data Found.</h1>}
-      </div>
-    </div>
+    <Page>
+      <h1>Explore Pass Items</h1>
+      {isLoading ? (
+        <div className="spinner">
+          <Loading />
+        </div>
+      ) : (
+        <div className={classes["items"]}>
+          {passData.map((item) => (
+            <DiscoverItemsItem
+              key={v4()}
+              onBuyNow={() => {
+                router.push(`/pass/buy-now/${item.tokenId}`);
+              }}
+              nftData={item}
+            />
+          ))}
+        </div>
+      )}
+      {passData.length === 0 && !isLoading && <h1>No Data Found.</h1>}
+    </Page>
   );
 };
 

@@ -1,36 +1,23 @@
 import classes from "@/styles/buyNow.module.css";
-import NavBar from "@/components/navigation/navBar";
-import Checkout from "@/components/Providers/Checkout";
-import Fractionalize from "../Providers/Fractionalize.js";
 import { contractAddress } from "../../../constants";
 import { MediaRenderer } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import useSubscriptionData from "../helpers/subscriptionData";
-import useModal from "../hooks/useModal.js";
+import Page from "../ui/Page";
 
 const BuyNow = ({
-  showInput,
-  onCheckout,
+  isOwner,
   nftData,
-  onFractionalize,
-  showFractionalize,
+  children,
+  nftPrice,
+  tokensAvailable,
+  subscriptionPrice,
 }) => {
   const router = useRouter();
   const { getWithdraw } = useSubscriptionData(nftData.contract.address);
 
-  const { handlePresent } = useModal(
-    <Checkout showInput={showInput} onCheckout={onCheckout} />
-  );
-  const { handlePresent: handlePresentFractionalize } = useModal(
-    <Fractionalize
-      onFractionalize={onFractionalize}
-      token={nftData.contract.address}
-      tokenId={nftData.tokenId}
-    />
-  );
   return (
-    <div className={`page ${classes["buyNow-page"]}`}>
-      <NavBar />
+    <Page>
       <div className={classes["buyNow-page-details"]}>
         <div className={classes["left-box"]}>
           <div>
@@ -58,10 +45,28 @@ const BuyNow = ({
 
               <p>Blockchain</p>
               <h3>ETH</h3>
+              {nftPrice && (
+                <>
+                  <p>Price</p>
+                  <h3>{nftPrice} ETH</h3>
+                </>
+              )}
+              {tokensAvailable && (
+                <>
+                  <p>Tokens Available</p>
+                  <h3>{tokensAvailable}</h3>
+                </>
+              )}
               {nftData.partsAvailable && (
                 <>
                   <p>Parts Available</p>
                   <h3>{nftData.partsAvailable}</h3>
+                </>
+              )}
+              {subscriptionPrice && (
+                <>
+                  <p>Subscription Price</p>
+                  <h3>{subscriptionPrice} ETH</h3>
                 </>
               )}
 
@@ -79,7 +84,7 @@ const BuyNow = ({
         <div className={classes["right-box"]}>
           <div>
             <h2>{nftData.rawMetadata.name}</h2>
-            {router.pathname.includes("pass") && (
+            {router.pathname.includes("pass") && isOwner && (
               <button
                 onClick={getWithdraw}
                 className={`${classes.button} ${classes.buttonTop}`}
@@ -91,20 +96,11 @@ const BuyNow = ({
           <p>{nftData.rawMetadata.description}</p>
           <p className={classes["price-text"]}>Market Price</p>
           <h3>0.01 ETH = $ 16.029</h3>
-          <button className={classes.button} onClick={handlePresent}>
-            Buy Now
-          </button>
-          {showFractionalize && (
-            <button
-              className={`${classes.button} ${classes.fractionalize}`}
-              onClick={handlePresentFractionalize}
-            >
-              Fractionalize
-            </button>
-          )}
+
+          {children}
         </div>
       </div>
-    </div>
+    </Page>
   );
 };
 

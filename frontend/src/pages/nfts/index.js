@@ -8,6 +8,7 @@ import { dealsActions } from "@/store/deals";
 import { useSelector } from "react-redux";
 import Loading from "@/components/ui/Loading";
 import { v4 } from "uuid";
+import Page from "@/components/ui/Page";
 const Nfts = () => {
   const { isLoading, fetchData } = useFetchData();
   useEffect(() => {
@@ -18,30 +19,26 @@ const Nfts = () => {
 
   const router = useRouter();
   return (
-    <div className={`page ${classes["explore-page"]}`}>
-      <NavBar />
-      <div className={classes.box}>
-        <h1>Explore Nfts Items</h1>
-        {isLoading ? (
-          <div className="spinner">
-            <Loading />
-          </div>
-        ) : (
-          <div className={classes["items"]}>
-            {nftData.map((item) => (
-              <DiscoverItemsItem
-                key={v4()}
-                onBuyNow={() => {
-                  router.push(`/nfts/buy-now/${item.tokenId}`);
-                }}
-                nftData={item}
-              />
-            ))}
-          </div>
-        )}
-        {/* <div>{price}</div> */}
-      </div>
-    </div>
+    <Page>
+      <h1>Explore Nfts Items</h1>
+      {isLoading ? (
+        <div className="spinner">
+          <Loading />
+        </div>
+      ) : (
+        <div className={classes["items"]}>
+          {nftData.map((item) => (
+            <DiscoverItemsItem
+              key={v4()}
+              onBuyNow={() => {
+                router.push(`/nfts/buy-now/${item.tokenId}`);
+              }}
+              nftData={item}
+            />
+          ))}
+        </div>
+      )}
+    </Page>
   );
 };
 

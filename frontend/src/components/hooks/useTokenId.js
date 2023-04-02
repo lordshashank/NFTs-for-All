@@ -1,4 +1,4 @@
-import useFractional from "./useFractional";
+import useFunctions from "./useFunctions";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useWeb3Contract } from "react-moralis";
@@ -7,7 +7,7 @@ const useTokenId = () => {
   const [tokenIds, setTokenIds] = useState([]);
   const { runContractFunction: getTokenId } = useWeb3Contract({});
   const contracts = useSelector((state) => state.deals.contracts);
-  const fractional = useFractional();
+  const fractional = useFunctions();
   useEffect(() => {
     const loadTokenId = async () => {
       const response = await Promise.all(

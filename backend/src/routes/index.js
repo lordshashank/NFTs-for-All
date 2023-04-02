@@ -14,6 +14,7 @@ import { getAllSubscriptionalNftsRoute } from "./getAllSubscriptionalNftsRoute";
 import { getProfileNftsRoute } from "./getProfileNftsRoute";
 import { uploadPhotoRoute } from "./UploadPhotoRoute";
 import { getProfileRoute } from "./getProfileRoute";
+import { getProfileSubscriptionNftsRoute } from "./getProfileSubscriptionNftsRoute";
 export const routes = [
   getNftsDataRoute,
   getPassNftsDataRoute,
@@ -31,4 +32,5 @@ export const routes = [
   getProfileNftsRoute,
   uploadPhotoRoute,
   getProfileRoute,
+  getProfileSubscriptionNftsRoute,
 ];

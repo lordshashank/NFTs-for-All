@@ -10,9 +10,25 @@ export const uploadPhotoRoute = {
     const { file } = req.files;
     const fileExtension = extname(file.name);
     const newFileName = uuid() + fileExtension;
-    await addNewProfile("/" + newFileName, name, description, userAccount);
-    file.mv("src/uploads/" + newFileName, (err) => {
-      res.status(200).json({ message: "Upload Successful!" });
-    });
+    try {
+      const response = await addNewProfile(
+        "/" + newFileName,
+        name,
+        description,
+        userAccount
+      );
+      if (response.error) {
+        return res.status(400).json({
+          error: response.error,
+        });
+      }
+      file.mv("src/uploads/" + newFileName, (err) => {
+        res.status(200).json({ message: "Upload Successful!" });
+      });
+    } catch (err) {
+      res.status(400).json({
+        error: err,
+      });
+    }
   },
 };

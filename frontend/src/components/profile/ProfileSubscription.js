@@ -1,30 +1,27 @@
+import { dealsActions } from "@/store/deals";
 import React from "react";
-import useWeb3 from "../hooks/useWeb3";
 import { useSelector } from "react-redux";
+import useRequestActionWithUser from "../hooks/useRequestActionWithUser";
 import Loading from "../ui/Loading";
 import classes from "@/styles/Explore.module.css";
 import DiscoverItemsItem from "../home/DiscoverItemsItem";
-import { useRouter } from "next/router";
-import useFetchContract from "../hooks/useFetchContract";
-import useSubscriptionNfts from "../hooks/useSubscriptionNfts";
 import { v4 } from "uuid";
-const ProfileSubscription = () => {
-  const router = useRouter();
-  const { userAccount } = useWeb3();
-  const subscriptionNfts = useSelector((state) => state.deals.passData);
-  const url = `http://localhost:8000/get-fractional-contracts/${userAccount}`;
-  const { isLoading: isLoadingContracts } = useFetchContract(url);
-  const { isLoading: isLoadingNfts } = useSubscriptionNfts();
 
+const ProfileSubscription = () => {
+  const { isLoading } = useRequestActionWithUser(
+    "profile-subscription-nfts",
+    dealsActions.addPassData
+  );
+  const nfts = useSelector((state) => state.deals.passData);
   return (
     <div>
-      {isLoadingContracts || isLoadingNfts ? (
+      {isLoading ? (
         <div className="spinner">
           <Loading />
         </div>
       ) : (
         <div className={classes["items"]}>
-          {subscriptionNfts.map((item) => (
+          {nfts.map((item) => (
             <DiscoverItemsItem
               key={v4()}
               onBuyNow={() => {

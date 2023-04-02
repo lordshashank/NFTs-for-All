@@ -13,15 +13,21 @@ import { IoMdSettings } from "react-icons/io";
 import { BsFillPersonPlusFill } from "react-icons/bs";
 import useWeb3 from "@/components/hooks/useWeb3.js";
 
-import useUserProfile from "@/components/hooks/useUserProfile";
 import useNotification from "@/components/hooks/useNotification";
+import useRequestActionWithUser from "@/components/hooks/useRequestActionWithUser";
+import { dealsActions } from "@/store/deals";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
   const router = useRouter();
   const [activeComponent, setActiveComponent] = useState("nft");
   const { userAccount } = useWeb3();
-  const { profile } = useUserProfile();
   const { showNotification } = useNotification();
+  const { isLoading } = useRequestActionWithUser(
+    "profile",
+    dealsActions.updateProfile
+  );
+  const profile = useSelector((state) => state.deals.profile);
 
   const handleButtonClick = (componentName) => {
     setActiveComponent(componentName);
@@ -76,9 +82,10 @@ const Profile = () => {
             {profile.name}
             <GoVerified style={{ color: "green" }} />
           </h5>
-          <p className={classes["text-slate"]}>
-            Created by <span className={classes["text-id"]}>{userAccount}</span>
-          </p>
+          <div>
+            <p className={classes["text-slate"]}>Created by</p>
+            <p className={classes["text-id"]}>{userAccount}</p>
+          </div>
           <div className={classes["profile-bar"]}>
             <button onClick={showCheckNotification}>+ Follow me</button>
             <div className={classes["profile-bara-data"]}>
