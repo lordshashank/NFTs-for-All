@@ -2,7 +2,17 @@ import classes from "@/styles/Checkout.module.css";
 import { useState } from "react";
 import { buyNowActions } from "@/store/buyNow";
 import { useDispatch } from "react-redux";
-const Checkout = ({ showInput, onSell, onCheckout, buttonText, tokenId }) => {
+const Checkout = ({
+  showInput,
+  onSell,
+  onCheckout,
+  buttonText,
+  tokenId,
+  onChangePrice,
+  inputTitle,
+  onSubscribe,
+  nftPrice,
+}) => {
   const [price, setPrice] = useState("");
   const dispatch = useDispatch();
   const closeHandler = (e) => {
@@ -13,6 +23,15 @@ const Checkout = ({ showInput, onSell, onCheckout, buttonText, tokenId }) => {
   const clickHandler = async () => {
     if (onSell) {
       onSell(tokenId, price);
+    }
+    if (onCheckout) {
+      onCheckout(price);
+    }
+    if (onChangePrice) {
+      onChangePrice(price);
+    }
+    if (onSubscribe) {
+      onSubscribe();
     }
   };
   return (
@@ -28,24 +47,19 @@ const Checkout = ({ showInput, onSell, onCheckout, buttonText, tokenId }) => {
           </button>
         </div>
         <div className={classes["form-field"]}>
-          <h3>Your Price:</h3>
+          <h3>{inputTitle}</h3>
           {showInput ? (
             <input
               type="number"
-              placeholder="00.00 Fraction"
+              placeholder="00.00"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
           ) : (
-            <h3>0.01 ETH</h3>
+            <h3>{nftPrice}</h3>
           )}
 
-          <button
-            className={classes.button}
-            onClick={() => {
-              onCheckout(price);
-            }}
-          >
+          <button className={classes.button} onClick={clickHandler}>
             {buttonText}
           </button>
         </div>

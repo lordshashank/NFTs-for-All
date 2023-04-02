@@ -157,6 +157,7 @@ const useNFTData = () => {
     console.log(result);
     return Number(result);
   };
+
   const handleSuccess = async (tx) => {
     try {
       await tx.wait(1);
@@ -164,6 +165,7 @@ const useNFTData = () => {
       console.log(error);
     }
   };
+
   //   useEffect(() => {
   //     const getNFTData = async () => {
   //       const contract = new Moralis.Web3.eth.Contract(abi, contractAddress);

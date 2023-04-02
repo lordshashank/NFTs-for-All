@@ -33,6 +33,8 @@ const buyNow = () => {
   const { handlePresent } = useModal(
     <Checkout
       showInput={false}
+      inputTitle="Your Price:"
+      nftPrice="0.01 ETH"
       onCheckout={checkoutBuy}
       buttonText="Buy"
       tokenId={tokenId}
@@ -41,6 +43,7 @@ const buyNow = () => {
   const { handlePresent: handlePresentForSell } = useModal(
     <Checkout
       showInput={true}
+      inputTitle="Your Price:"
       onSell={sell}
       buttonText="Set On Sale"
       tokenId={tokenId}

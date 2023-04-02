@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import useWeb3 from "../hooks/useWeb3";
-import { abi } from "../../../constants";
+import { abi, contractAddress } from "../../../constants";
 import { useWeb3Contract } from "react-moralis";
 
 const useFractionalData = () => {
@@ -91,6 +91,25 @@ const useFractionalData = () => {
     console.log(result);
     return result;
   };
+  const totalTokens = async (contractAddress) => {
+    const parameters = {
+      abi: abi.fractionalNft,
+      contractAddress: contractAddress,
+      functionName: "totalSupply",
+      params: {},
+    };
+    const result = await totalSupply({
+      params: parameters,
+      onSuccess: () => {
+        console.log("success");
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    });
+    console.log(result);
+    return Number(result);
+  };
 
   const setPrice = async (newPrice, contractAddress) => {
     if ((await ownerOf()) !== userAccount) {
@@ -113,7 +132,29 @@ const useFractionalData = () => {
       },
     });
     console.log(result);
+    f;
     return "Price changed successfully";
+  };
+  const buyFractions = async (parts, contractAddress) => {
+    buyPrice = await price(contractAddress);
+    buyPrice = buyPrice * parts;
+    const parameters = {
+      abi: abi.fractionalNft,
+      contractAddress: contractAddress,
+      functionName: "buyTokens",
+      msgValue: buyPrice,
+      params: { amount: parts },
+    };
+    await buyTokens({
+      params: parameters,
+      onSuccess: () => {
+        handleSuccess();
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+    });
+    return `${parts} tokens bought`;
   };
   const handleSuccess = async (tx) => {
     try {

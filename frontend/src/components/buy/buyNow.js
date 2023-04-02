@@ -1,14 +1,18 @@
 import classes from "@/styles/buyNow.module.css";
-import NavBar from "@/components/navigation/navBar";
-import Checkout from "@/components/Providers/Checkout";
 import { contractAddress } from "../../../constants";
 import { MediaRenderer } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import useSubscriptionData from "../helpers/subscriptionData";
-import useModal from "../hooks/useModal.js";
 import Page from "../ui/Page";
 
-const BuyNow = ({ showInput, onCheckout, nftData, children }) => {
+const BuyNow = ({
+  isOwner,
+  nftData,
+  children,
+  nftPrice,
+  tokensAvailable,
+  subscriptionPrice,
+}) => {
   const router = useRouter();
   const { getWithdraw } = useSubscriptionData(nftData.contract.address);
 
@@ -41,10 +45,28 @@ const BuyNow = ({ showInput, onCheckout, nftData, children }) => {
 
               <p>Blockchain</p>
               <h3>ETH</h3>
+              {nftPrice && (
+                <>
+                  <p>Price</p>
+                  <h3>{nftPrice} ETH</h3>
+                </>
+              )}
+              {tokensAvailable && (
+                <>
+                  <p>Tokens Available</p>
+                  <h3>{tokensAvailable}</h3>
+                </>
+              )}
               {nftData.partsAvailable && (
                 <>
                   <p>Parts Available</p>
                   <h3>{nftData.partsAvailable}</h3>
+                </>
+              )}
+              {subscriptionPrice && (
+                <>
+                  <p>Subscription Price</p>
+                  <h3>{subscriptionPrice} ETH</h3>
                 </>
               )}
 
@@ -62,7 +84,7 @@ const BuyNow = ({ showInput, onCheckout, nftData, children }) => {
         <div className={classes["right-box"]}>
           <div>
             <h2>{nftData.rawMetadata.name}</h2>
-            {router.pathname.includes("pass") && (
+            {router.pathname.includes("pass") && isOwner && (
               <button
                 onClick={getWithdraw}
                 className={`${classes.button} ${classes.buttonTop}`}
