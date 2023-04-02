@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import Loading from "@/components/ui/Loading";
 import useFractionalNfts from "@/components/hooks/useFractionalNfts";
 import useFetchAllFractionalContracts from "@/components/hooks/useFetchAllFractionalContracts";
+import Page from "@/components/ui/Page";
 import { v4 } from "uuid";
 const Fractional = () => {
   const { isLoading: isLoadingNfts } = useFractionalNfts();
@@ -14,29 +15,26 @@ const Fractional = () => {
   const { isLoading: isLoadingContracts } = useFetchAllFractionalContracts();
 
   return (
-    <div className={`page ${classes["explore-page"]}`}>
-      <NavBar />
-      <div className={classes.box}>
-        <h1>Explore Fractional Items</h1>
-        {isLoadingNfts || isLoadingContracts ? (
-          <div className="spinner">
-            <Loading />
-          </div>
-        ) : (
-          <div className={classes["items"]}>
-            {fractionalData.map((item) => (
-              <DiscoverItemsItem
-                key={v4()}
-                onBuyNow={() => {
-                  router.push(`/fractional/buy-now/${item.tokenId}`);
-                }}
-                nftData={item}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
+    <Page>
+      <h1>Explore Fractional Items</h1>
+      {isLoadingNfts || isLoadingContracts ? (
+        <div className="spinner">
+          <Loading />
+        </div>
+      ) : (
+        <div className={classes["items"]}>
+          {fractionalData.map((item) => (
+            <DiscoverItemsItem
+              key={v4()}
+              onBuyNow={() => {
+                router.push(`/fractional/buy-now/${item.tokenId}`);
+              }}
+              nftData={item}
+            />
+          ))}
+        </div>
+      )}
+    </Page>
   );
 };
 

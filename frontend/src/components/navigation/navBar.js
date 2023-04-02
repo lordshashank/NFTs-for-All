@@ -7,11 +7,16 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import logo from "@/../public/logo.jpeg";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
+import useScrolled from "../hooks/useScrolled";
 
 const NavBar = () => {
   const router = useRouter();
   const [showLinks, setShowLinks] = useState(false);
+  const [showNav, setShowNav] = useState(false);
   const { userAccount } = useWeb3();
+  const { scrolled } = useScrolled();
   const isActive = (path) => {
     if (router.pathname === path) return { color: "#7c3aed" };
   };
@@ -23,21 +28,19 @@ const NavBar = () => {
       return { color: "#fff" };
   };
   return (
-    <header className={classes.header}>
+    <header className={`${classes.header} ${scrolled && classes.scrolled}`}>
       <div className={classes.logo}>
-        <Image
-          src={logo}
-          width={60}
-          height={60}
-          style={{ borderRadius: "100px" }}
-          alt=""
-        />
-      </div>
-      <nav className={classes["nav-links"]}>
         <Link style={isActive("/")} className={classes.link} href="/">
-          Home
+          <Image
+            src={logo}
+            width={60}
+            height={60}
+            style={{ borderRadius: "100px" }}
+            alt=""
+          />
         </Link>
-
+      </div>
+      <nav className={`${classes["nav-links"]} ${showNav && classes.showNav}`}>
         <Link style={isActive("/nfts")} className={classes.link} href="/nfts">
           Nfts
         </Link>
@@ -100,6 +103,20 @@ const NavBar = () => {
           />
         </Link>
         <WalletConnect />
+        <GiHamburgerMenu
+          onClick={() => setShowNav(true)}
+          className={`${classes.hamburger} ${
+            showNav ? classes.inActive : classes.active
+          }`}
+          fontSize={"2rem"}
+        />
+        <AiOutlineClose
+          onClick={() => setShowNav(false)}
+          className={`${classes.hamburger} ${
+            showNav ? classes.active : classes.inActive
+          }`}
+          fontSize={"2rem"}
+        />
       </div>
     </header>
   );

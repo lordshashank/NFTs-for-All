@@ -8,14 +8,14 @@
   display: grid;
   place-items: center;
   background-color: rgb(15 23 42 / 0.5);
-  z-index: 100;
+  z-index: 1000;
 }
 .modal {
   background-color: rgb(15 23 42);
   color: white;
   width: 400px;
   border-radius: 10px;
-  z-index: 200;
+  z-index: 10000;
 }
 
 .heading {
@@ -51,6 +51,7 @@
   font-size: 1.3rem;
   border-radius: 30px;
   text-align: center;
+  cursor: pointer;
 }
 @media (width < 500px) {
   .modal {

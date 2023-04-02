@@ -1,18 +1,23 @@
+import { useEffect } from "react";
 import useWeb3 from "./useWeb3";
 import { dealsActions } from "@/store/deals";
-import { useEffect } from "react";
 import { useFetchData } from "@/pages/api/useFetchData";
 
-const useFetchContract = (url) => {
+const useRequestActionWithUser = (path, relAction) => {
   const { userAccount } = useWeb3();
   const { isLoading, fetchData } = useFetchData();
 
   useEffect(() => {
+    const loadData = () => {
+      const url = `http://localhost:8000/${path}/${userAccount}`;
+      fetchData(url, relAction);
+    };
     if (userAccount) {
-      fetchData(url, dealsActions.addContract);
+      loadData();
     }
   }, [userAccount]);
+
   return { isLoading };
 };
 
-export default useFetchContract;
+export default useRequestActionWithUser;

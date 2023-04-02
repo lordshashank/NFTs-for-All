@@ -32,3 +32,16 @@
   backdrop-filter: blur(100px);
   cursor: pointer;
 }
+@media (width < 700px) {
+  .three-cols {
+    flex-direction: column;
+  }
+  .image-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .image-selector > p {
+    text-align: center;
+  }
+}
