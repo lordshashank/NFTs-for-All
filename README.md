@@ -179,7 +179,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Your Name - [@0xlord_forever](https://twitter.com/0xlord_forever) - shashanktrivedi1917@gmail.com
 
 Project Link: [https://devfolio.co/projects/nfa-nfts-for-all-34e5](https://devfolio.co/projects/nfa-nfts-for-all-34e5)
 
