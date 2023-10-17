@@ -3,9 +3,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname:
-          "https://bafybeicz57su3zyafexgchnfqej7zuxfa3e4xgz22yzmge6nzkhfmskqs4",
+        protocol: "http",
+        hostname: "ipfs.io",
         port: "",
         // pathname: "/account123/**",
       },

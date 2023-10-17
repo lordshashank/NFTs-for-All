@@ -10,7 +10,7 @@ import logo from "@/../public/logo.jpeg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import useScrolled from "../hooks/useScrolled";
-
+import profile from "@/../public/logo.jpg";
 const NavBar = () => {
   const router = useRouter();
   const [showLinks, setShowLinks] = useState(false);
@@ -92,10 +92,7 @@ const NavBar = () => {
           style={{ all: "unset", padding: "0", margin: "0", cursor: "pointer" }}
         >
           <Image
-            loader={() =>
-              "https://shreethemes.in/giglink/layouts/assets/images/avatar/1.jpg"
-            }
-            src="https://shreethemes.in/giglink/layouts/assets/images/avatar/1.jpg"
+            src={profile}
             width={50}
             alt=""
             height={50}

@@ -8,7 +8,7 @@ const initialDealsState = {
   check: false,
   buyPrice: 0,
   profile: {
-    url: "https://shreethemes.in/giglink/layouts/assets/images/blog/single.jpg",
+    url: "/logo.jpg",
     name: "Jenny Jimenez",
   },
 };

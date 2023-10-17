@@ -1,5 +1,6 @@
 import classes from "../../styles/DiscoverItems.module.css";
-import { MediaRenderer } from "@thirdweb-dev/react";
+// import { MediaRenderer } from "@thirdweb-dev/react";
+import Image from "next/image";
 
 const DiscoverItemsItem = ({ onBuyNow, nftData }) => {
   const loader = nftData.isNoLoader ? null : () => nftData.rawMetaData.image;
@@ -8,9 +9,11 @@ const DiscoverItemsItem = ({ onBuyNow, nftData }) => {
   return (
     <div className={classes["discover-card"]}>
       <div className={classes.nft}>
-        <MediaRenderer
-          src={nftData.rawMetadata.image}
+        <Image
+          src={`http://ipfs.io/ipfs/${nftData.rawMetadata.image.slice(7)}`}
           className={classes["nft-image"]}
+          width={500}
+          height={500}
           alt=""
           style={{ width: "100%", height: "auto", objectFit: "fill" }}
         />
@@ -20,8 +23,8 @@ const DiscoverItemsItem = ({ onBuyNow, nftData }) => {
       </div>
       <div className={classes.details}>
         <div className={classes.owner}>
-          <MediaRenderer
-            src={nftData.rawMetadata.image}
+          <Image
+            src={`http://ipfs.io/ipfs/${nftData.rawMetadata.image.slice(7)}`}
             alt=""
             width={50}
             height={50}

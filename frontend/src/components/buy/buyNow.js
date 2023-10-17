@@ -1,10 +1,10 @@
 import classes from "@/styles/buyNow.module.css";
 import { contractAddress } from "../../../constants";
-import { MediaRenderer } from "@thirdweb-dev/react";
+// import { MediaRenderer } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import useSubscriptionData from "../helpers/subscriptionData";
 import Page from "../ui/Page";
-
+import Image from "next/image";
 const BuyNow = ({
   isOwner,
   nftData,
@@ -21,9 +21,11 @@ const BuyNow = ({
       <div className={classes["buyNow-page-details"]}>
         <div className={classes["left-box"]}>
           <div>
-            <MediaRenderer
-              src={nftData.rawMetadata.image}
+            <Image
+              src={`http://ipfs.io/ipfs/${nftData.rawMetadata.image.slice(7)}`}
               // src={nft}
+              width={500}
+              height={500}
               // className={classes.nft}
               style={{
                 width: "100%",

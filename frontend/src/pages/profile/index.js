@@ -53,10 +53,7 @@ const Profile = () => {
           <Image
             className={classes["background-image"]}
             type="file"
-            loader={() =>
-              "https://shreethemes.in/giglink/layouts/assets/images/blog/single.jpg"
-            }
-            src="https://shreethemes.in/giglink/layouts/assets/images/blog/single.jpg"
+            src="/single.jpg"
             id="background-image"
             alt="image"
             width={100}
